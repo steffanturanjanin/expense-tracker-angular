@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-progress-spinner
+    *ngIf="(requesting$ | async) && deletingCategoryId === category.id" mode="indeterminate" [diameter]="150">
+  </mat-progress-spinner>
+  <span (click)="deleteCategory(category.id)">
+        <i class="fa fa-times"></i>
+  </span>
+  <i class="fa {{category.icon}} category-icon"></i>
+  <p>{{category.name}}</p>
+</mat-card>

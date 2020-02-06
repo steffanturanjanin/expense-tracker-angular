@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+  <i class="fa fa-bars" (click)="drawer.toggle()"></i>
+  <span>Expense Tracker</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+
+  <div class="logout-button-container">
+    <span class="user-email" *ngIf="user !== null">{{user.email}}</span>
+    <button mat-raised-button color="white">
+      <span>Logout</span> <i class="fa fa-sign-out"></i>
+    </button>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer mode="side" opened role="navigation">
+    <mat-nav-list>
+      <a mat-list-item routerLink='/first'>First Component</a>
+      <a mat-list-item routerLink='/second'>Second Component</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,36 @@
+
+
+mat-form-field {
+  width: 100%;
+  min-width: 350px;
+}
+
+mat-card {
+  display: inline-block;
+  width: 350px;
+  height: 300px;
+  margin: auto;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+mat-form-field {
+  margin-top: 10px;
+}
+
+mat-card-actions {
+  margin-bottom: 0;
+}
+
+mat-card-actions button {
+  margin-top: 10px;
+}
+
+mat-spinner {
+  display: inline-block;
+  margin-top: 10px;
+}

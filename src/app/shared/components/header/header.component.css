@@ -1,0 +1,46 @@
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-sidenav-container {
+  height: 93%;
+}
+
+mat-toolbar {
+  height: 7%;
+}
+
+.fa-bars {
+  font-size: 32px;
+  margin-left: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.logout-button-container {
+  position: absolute;
+  right: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-button-container button {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.user-email {
+  font-size: medium;
+  font-weight: 500;
+}
+
+.fa-sign-out {
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+

@@ -1,0 +1,33 @@
+.icon {
+  background-color: white;
+}
+
+.selected-icon {
+  background-color: darkgray;
+}
+
+.search-bar-container {
+  text-align: center;
+}
+
+mat-form-field {
+  width: 80%;
+}
+
+mat-grid-list {
+  margin: 20px;
+}
+
+mat-card {
+  height: 24px;
+  width: 24px;
+  float: left;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 24px;
+  text-align: center;
+}
+
+mat-card i {
+  display: inline-block;
+}

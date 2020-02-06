@@ -1,0 +1,33 @@
+mat-card {
+  height: 180px;
+  width: 150px;
+  border: 2px solid #7B1FA2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-progress-spinner {
+  position: absolute;
+  top: 20%;
+}
+
+mat-card span {
+  font-size: 25px;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  color: #9b5fe2;
+  cursor: pointer;
+}
+
+.category-icon {
+  font-size: 40px;
+  color: #9b5fe2;
+  position: absolute;
+}
+
+mat-card p {
+  position: relative;
+  bottom: -30px;
+}

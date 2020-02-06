@@ -1,0 +1,30 @@
+mat-grid-list {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+mat-card {
+  text-align: center;
+}
+
+mat-card i {
+  display: inline-block;
+}
+
+mat-grid-list form {
+  width: 50%;
+  display: inline-block;
+}
+
+mat-grid-list form mat-card {
+  height: 24px;
+  width: 24px;
+  font-size: 24px;
+  display: inline-block;
+  margin-right: 15px;
+}
+
+mat-form-field {
+  width: 40%;
+}

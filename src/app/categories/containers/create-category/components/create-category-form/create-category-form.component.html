@@ -1,0 +1,16 @@
+<mat-grid-list cols="1">
+  <form (ngSubmit)="onSubmit(form)" [formGroup]="form">
+    <mat-card>
+      <i class="fa {{selectedIcon}}"></i>
+    </mat-card>
+    <mat-form-field>
+      <input formControlName="categoryName" type="text" matInput placeholder="Category name" required >
+      <mat-error *ngIf="form.get('categoryName').errors?.validationError">
+        {{form.get('categoryName').errors?.validationError}}
+      </mat-error>
+    </mat-form-field>
+    <mat-card-actions>
+      <button type="submit" mat-raised-button color="primary">Create category</button>
+    </mat-card-actions>
+  </form>
+</mat-grid-list>

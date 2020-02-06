@@ -1,0 +1,40 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Sign up</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="example-form" (ngSubmit)="onSubmit(form)" [formGroup]="form">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input formControlName="email" type="email" matInput placeholder="Email"  name="email" required>
+              <mat-error *ngIf="form.get('email').errors?.validationError">
+                {{form.get('email').errors?.validationError}}
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td><mat-form-field class="example-full-width">
+            <input formControlName="password" matInput placeholder="Password" type="password" name="password" required>
+            <mat-error *ngIf="form.get('password').errors?.validationError">
+              {{form.get('password').errors?.validationError}}
+            </mat-error>
+          </mat-form-field></td>
+        </tr>
+      </table>
+
+      <mat-card-actions>
+        <button type="submit" mat-raised-button color="primary">Sign up</button>
+      </mat-card-actions>
+      <p style="margin: 0">Already have an account?
+        <a routerLink="/"> Log in </a>
+      </p>
+      <mat-spinner [diameter]="40" *ngIf="(requesting$ | async)"></mat-spinner>
+
+    </form>
+
+  </mat-card-content>
+
+</mat-card>

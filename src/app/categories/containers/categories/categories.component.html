@@ -1,0 +1,18 @@
+<mat-grid-list cols="5" rowHeight="1.8:2">
+  <mat-grid-tile *ngFor="let category of categories$ | async | keyvalue">
+    <app-category-card
+      [category] = "category.value"
+      [requesting$] = "requesting$"
+      [deletingCategoryId] = "deletingCategoryId"
+      (deletedCategory) = "onDeletedCategory($event)">
+    </app-category-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>
+      <a routerLink="/categories/create-category">
+        <i class="fa fa-plus-circle"></i>
+      </a>
+      <p>Add category</p>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

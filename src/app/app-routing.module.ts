@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LogInComponent } from './authentication/containers/log-in/log-in.component';
 
-
-const routes: Routes = [];
+const routes: Routes = [
+  // { path: '**', redirectTo: '/'}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
