@@ -2,9 +2,14 @@ import { ExpensesComponent } from './containers/expenses/expenses.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthGuardService } from '../core/guards/auth-guard.service';
+import { AuthenticatedLayoutComponent } from '../shared/layouts/authenticated-layout/authenticated-layout.component';
 
 const expensesRoutes: Routes = [
-  { path: 'expenses', component: ExpensesComponent, canActivate: [AuthGuardService] },
+  { path: 'expenses', component: AuthenticatedLayoutComponent, canActivate: [AuthGuardService],
+    children: [
+      { path: '', component: ExpensesComponent }
+    ]
+  },
 ];
 
 @NgModule({

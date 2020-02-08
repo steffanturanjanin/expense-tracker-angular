@@ -1,6 +1,6 @@
-import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {Category} from '../../../shared/models/category/category';
-import {CategoriesActions, CategoriesActionTypes} from '../actions/categories.actions';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Category } from '../../../shared/models/category/category';
+import { CategoriesActions, CategoriesActionTypes } from '../actions/categories.actions';
 
 export interface State extends EntityState<Category> {
   requesting: boolean;

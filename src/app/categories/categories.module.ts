@@ -12,8 +12,6 @@ import { reducers } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from './store/effects';
 
-import { AuthenticatedLayoutComponent } from '../shared/layouts/authenticated-layout/authenticated-layout.component';
-import { HeaderComponent } from '../shared/components/header/header.component';
 import { CategoryCardComponent } from './containers/categories/components/category-card/category-card.component';
 
 @NgModule({
@@ -22,8 +20,6 @@ import { CategoryCardComponent } from './containers/categories/components/catego
     CreateCategoryComponent,
     CreateCategoryFormComponent,
     CategoryIconListComponent,
-    AuthenticatedLayoutComponent,
-    HeaderComponent,
     CategoryCardComponent
   ],
   imports: [

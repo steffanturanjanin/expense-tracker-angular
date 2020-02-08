@@ -5,7 +5,7 @@ import { map, switchMap, catchError, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
 
-import { AuthService } from '../../../core/auth.service';
+import { AuthService } from '../../../core/services/auth/auth.service';
 import {
   AuthActions,
   AuthActionTypes,

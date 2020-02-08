@@ -17,7 +17,7 @@ import { AuthenticationLayoutComponent } from '../shared/layouts/authentication-
 
 @NgModule({
   declarations: [
-    AuthenticationLayoutComponent,
+    // AuthenticationLayoutComponent,
     SignUpComponent,
     LogInComponent,
   ],

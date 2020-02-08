@@ -1,0 +1,39 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+  <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile colspan="2" rowspan="1">
+      <mat-form-field style="width: 90%">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" name="name" formControlName="name">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="1">
+      <mat-form-field style="width: 90%">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of categories$ | async | keyvalue" value="{{category.value.id}}">
+            <i class="fa {{category.value.icon}}" style="margin-right: 10px;"></i>
+            {{category.value.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="1">
+      <mat-form-field style="width: 90%">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" name="amount" formControlName="amount" value="0.00" (change)="formatValue($event)" placeholder="Amount"  />
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="1">
+      <mat-form-field style="width: 90%">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="0"><i class="fa fa-arrow-up"></i>Expense</mat-option>
+          <mat-option value="1"><i class="fa fa-arrow-down"></i>Income</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="4" rowspan="1">
+      <button mat-button style="width: 220px; background-color: #8B30B2; position: relative; bottom: 20px; left: 0" type="submit">Submit</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

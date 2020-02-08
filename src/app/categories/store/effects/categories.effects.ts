@@ -1,6 +1,6 @@
 import {Injectable, NgZone} from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { CategoriesService } from '../../../core/categories.service';
+import { CategoriesService } from '../../../core/services/categories/categories.service';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import {
