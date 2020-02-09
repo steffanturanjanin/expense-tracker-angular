@@ -36,9 +36,9 @@ export const selectCategoriesEntities = createSelector(
   categories.selectCategoriesEntities
 );
 
-export const selectAllCategories = createSelector(
+export const selectCategoriesAll = createSelector(
   selectCategoriesState,
-  categories.selectAllCategories
+  categories.selectCategoriesAll
 );
 
 export const selectCategoriesTotal = createSelector(

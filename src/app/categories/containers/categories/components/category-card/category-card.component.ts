@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Category} from '../../../../../shared/models/category/category';
-import {Observable} from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Category } from '../../../../../shared/models/category/category';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-category-card',

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Category} from '../../../shared/models/category/category';
-import {Store} from '@ngrx/store';
+import { Category } from '../../../shared/models/category/category';
+import { Store } from '@ngrx/store';
 import * as fromStore from '../../store/reducers/index';
-import {CategoriesState} from '../../store/reducers';
-import {DeleteCategoryRequestAction, GetCategoriesRequestAction} from '../../store/actions/categories.actions';
-import {Observable} from 'rxjs';
-import {Dictionary} from '@ngrx/entity';
+import { CategoriesState } from '../../store/reducers';
+import { DeleteCategoryRequestAction, GetCategoriesRequestAction } from '../../store/actions/categories.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-categories',
@@ -14,7 +13,7 @@ import {Dictionary} from '@ngrx/entity';
 })
 export class CategoriesComponent implements OnInit {
 
-  categories$: Observable<Dictionary<Category>>;
+  categories$: Observable<Category[]>;
   requesting$: Observable<boolean>;
   deletingCategoryId: number | null;
 
@@ -24,7 +23,7 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new GetCategoriesRequestAction());
-    this.categories$ = this.store.select(fromStore.selectCategoriesEntities);
+    this.categories$ = this.store.select(fromStore.selectCategoriesAll);
     this.requesting$ = this.store.select(fromStore.selectCategoriesRequesting);
   }
 

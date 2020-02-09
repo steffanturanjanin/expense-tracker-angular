@@ -1,6 +1,6 @@
-import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {Expense} from '../../../shared/models/expense/expense';
-import {ExpensesActions, ExpensesActionTypes} from '../actions/expenses.actions';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Expense } from '../../../shared/models/expense/expense';
+import { ExpensesActions, ExpensesActionTypes } from '../actions/expenses.actions';
 
 export interface State extends EntityState<Expense> {
   requesting: boolean;
@@ -31,7 +31,7 @@ export function reducer(state: State = initialState, action: ExpensesActions) {
       return {
         ...state,
         requesting: false,
-        error: null
+        error: action.payload.error
       };
     }
     default:

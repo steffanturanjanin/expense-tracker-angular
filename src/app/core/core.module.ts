@@ -7,9 +7,9 @@ import { LoggedInGuardService } from './guards/logged-in-guard.service';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {CategoriesService} from './services/categories/categories.service';
-import {ExpensesService} from './services/expenses/expenses.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CategoriesService } from './services/categories/categories.service';
+import { ExpensesService } from './services/expenses/expenses.service';
 
 @NgModule({
   declarations: [],

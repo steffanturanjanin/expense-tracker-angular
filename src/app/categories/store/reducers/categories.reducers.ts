@@ -94,6 +94,6 @@ export const selectCategoriesIds = selectIds;
 
 export const selectCategoriesEntities = selectEntities;
 
-export const selectAllCategories = selectAll;
+export const selectCategoriesAll = selectAll;
 
 export const selectCategoriesTotal = selectTotal;
