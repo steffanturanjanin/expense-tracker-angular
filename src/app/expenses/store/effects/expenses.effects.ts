@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { ExpensesService } from '../../../core/services/expenses/expenses.service';
-import { Observable, of } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Actions, Effect, ofType} from '@ngrx/effects';
+import {ExpensesService} from '../../../core/services/expenses/expenses.service';
+import {Observable, of} from 'rxjs';
 import {
   CreateExpenseFailureAction,
   CreateExpenseRequestAction,
   CreateExpenseSuccessAction,
-  ExpensesActionTypes
+  ExpensesActions,
+  ExpensesActionTypes, GetExpensesFailureAction, GetExpensesSuccessAction
 } from '../actions/expenses.actions';
 import {catchError, map, switchMap} from 'rxjs/operators';
 
@@ -29,5 +30,22 @@ export class ExpensesEffects {
         })
       );
     }),
+  );
+
+  @Effect()
+  getExpensesRequestAction$: Observable<any> = this.actions.pipe(
+    ofType<ExpensesActions>(ExpensesActionTypes.GET_EXPENSES_REQUEST),
+    switchMap((action: ExpensesActions) => {
+      if (action.type === ExpensesActionTypes.GET_EXPENSES_REQUEST) {
+        return this.expensesService.getExpensesForMonth(action.payload.year, action.payload.month).pipe(
+          map((response) => {
+            return new GetExpensesSuccessAction({ expenses: response });
+          }),
+          catchError((error) => {
+            return of(new GetExpensesFailureAction({ error }));
+          })
+        );
+      }
+    })
   );
 }

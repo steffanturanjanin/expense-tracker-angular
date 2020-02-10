@@ -13,4 +13,8 @@ export class ExpensesService {
   createExpense(expense: Expense): Observable<Expense> {
     return this.http.post<Expense>('http://localhost:8000/api/expenses', expense);
   }
+
+  getExpensesForMonth(year: number, month: number): Observable<Expense[]> {
+    return this.http.get<Expense[]>(`http://localhost:8000/api/expenses/${year}/${month}`);
+  }
 }
