@@ -6,10 +6,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import {AddExpenseFormComponent} from './components/add-expense-form/add-expense-form.component';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../app.state';
-import {GetExpensesRequestAction} from '../../store/actions/expenses.actions';
+import {DeleteExpensesRequestAction, GetExpensesRequestAction} from '../../store/actions/expenses.actions';
 import * as fromStore from '../../store/reducers/index';
 import { Expense } from '../../../shared/models/expense/expense';
-
 
 @Component({
   selector: 'app-expenses',
@@ -18,8 +17,10 @@ import { Expense } from '../../../shared/models/expense/expense';
 })
 
 export class ExpensesComponent implements OnInit {
-  expenses$: Observable<Expense[]>;
-  displayedColumns: string[] = ['id', 'category', 'name', 'amount', 'date', 'type'];
+  deletingExpense = -1;
+  requesting$: Observable<boolean>;
+  showDelete = false;
+  displayedColumns: string[] = ['id', 'category', 'name', 'amount', 'date', 'type', 'actions', 'loader'];
   dataSource: MatTableDataSource<Expense>;
 
   formatter = new Intl.DateTimeFormat('en', { month: 'long' });
@@ -37,6 +38,8 @@ export class ExpensesComponent implements OnInit {
     const date = new Date();
     console.log(formatter.format(date));
 
+    this.requesting$ = this.store.select(fromStore.selectExpensesRequesting);
+
     this.store.dispatch(new GetExpensesRequestAction({year: this.year, month: this.month}));
     this.store.select(fromStore.selectExpensesAll).subscribe((expenses) => {
       this.dataSource = new MatTableDataSource();
@@ -52,6 +55,21 @@ export class ExpensesComponent implements OnInit {
     dialogConfig.width = '60%';
     dialogConfig.data = {animal: 'panda'};
     this.dialog.open(AddExpenseFormComponent, dialogConfig);
+  }
+
+  onShowDelete() {
+    this.showDelete = !this.showDelete;
+  }
+
+  deleteExpense(row) {
+    console.log(row);
+    this.deletingExpense = row.id;
+    this.store.dispatch(new DeleteExpensesRequestAction({id: row.id}));
+    this.requesting$.subscribe((requesting) => {
+        if (!requesting) {
+          this.showDelete = false;
+        }
+    });
   }
 
 }

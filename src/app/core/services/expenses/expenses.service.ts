@@ -17,4 +17,8 @@ export class ExpensesService {
   getExpensesForMonth(year: number, month: number): Observable<Expense[]> {
     return this.http.get<Expense[]>(`http://localhost:8000/api/expenses/${year}/${month}`);
   }
+
+  deleteExpense(id: number): Observable<Expense> {
+    return this.http.delete<Expense>(`http://localhost:8000/api/expenses/${id}`);
+  }
 }

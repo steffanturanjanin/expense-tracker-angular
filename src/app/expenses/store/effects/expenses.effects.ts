@@ -5,11 +5,11 @@ import {Observable, of} from 'rxjs';
 import {
   CreateExpenseFailureAction,
   CreateExpenseRequestAction,
-  CreateExpenseSuccessAction,
+  CreateExpenseSuccessAction, DeleteExpensesFailureAction, DeleteExpensesRequestAction, DeleteExpensesSuccessAction,
   ExpensesActions,
   ExpensesActionTypes, GetExpensesFailureAction, GetExpensesSuccessAction
 } from '../actions/expenses.actions';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {catchError, map, pluck, switchMap} from 'rxjs/operators';
 
 @Injectable()
 export class ExpensesEffects {
@@ -46,6 +46,21 @@ export class ExpensesEffects {
           })
         );
       }
+    })
+  );
+
+  @Effect()
+  deleteExpenseRequestAction$: Observable<any> = this.actions.pipe(
+    ofType<DeleteExpensesRequestAction>(ExpensesActionTypes.DELETE_EXPENSE_REQUEST),
+    pluck('payload'),
+    switchMap((payload) => {
+      return this.expensesService.deleteExpense(payload.id).pipe(
+        map((response) => {
+          return new DeleteExpensesSuccessAction({ expense: response });
+        }),
+        catchError((error) => {
+          return of(new DeleteExpensesFailureAction({ error }));
+        }));
     })
   );
 }

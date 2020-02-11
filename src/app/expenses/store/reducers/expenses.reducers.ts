@@ -52,6 +52,24 @@ export function reducer(state: State = initialState, action: ExpensesActions) {
         error: action.payload.error
       };
     }
+    case ExpensesActionTypes.DELETE_EXPENSE_REQUEST: {
+      return {
+        ...state,
+        requesting: true,
+        error: null,
+      };
+    }
+    case ExpensesActionTypes.DELETE_EXPENSE_SUCCESS: {
+      return adapter.removeOne(action.payload.expense.id,
+        { ...state, requesting: false, error: null});
+    }
+    case ExpensesActionTypes.DELETE_EXPENSE_FAILURE: {
+      return {
+        ...state,
+        requesting: false,
+        error: action.payload.error
+      };
+    }
     default:
       return state;
   }
