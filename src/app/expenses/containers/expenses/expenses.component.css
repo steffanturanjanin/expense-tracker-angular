@@ -1,21 +1,38 @@
-table {
-  width: 90%;
+mat-toolbar {
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  background-color:  #8B30B2;
+  z-index: 1;
 }
 
-th.mat-sort-header-sorted {
-  color: black;
+mat-toolbar a {
+  font-size: 16px;
+  margin-right: 10px;
+  color: white;
 }
 
-.income {}
-
-.income td {
-  color: #64DD17;
+h2 {
   font-weight: 500;
+  margin-top: 70px;
 }
 
-.expense {}
+mat-grid-list mat-card {
+  border: 2px solid #7B1FA2;
+  height: 50%;
+  width: 200px;
+  display: -webkit-flexbox;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  justify-content: center;
+}
 
-.expense td {
-  color: #FF5252;
-  font-weight: 500;
+mat-divider {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

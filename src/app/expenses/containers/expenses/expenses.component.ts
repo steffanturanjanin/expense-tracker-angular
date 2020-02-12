@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import {AddExpenseFormComponent} from './components/add-expense-form/add-expense-form.component';
@@ -9,6 +8,7 @@ import {AppState} from '../../../app.state';
 import {DeleteExpensesRequestAction, GetExpensesRequestAction} from '../../store/actions/expenses.actions';
 import * as fromStore from '../../store/reducers/index';
 import { Expense } from '../../../shared/models/expense/expense';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-expenses',
@@ -17,11 +17,11 @@ import { Expense } from '../../../shared/models/expense/expense';
 })
 
 export class ExpensesComponent implements OnInit {
-  deletingExpense = -1;
   requesting$: Observable<boolean>;
   showDelete = false;
-  displayedColumns: string[] = ['id', 'category', 'name', 'amount', 'date', 'type', 'actions', 'loader'];
-  dataSource: MatTableDataSource<Expense>;
+  expenses: Expense[];
+  income: number;
+  expense: number;
 
   formatter = new Intl.DateTimeFormat('en', { month: 'long' });
   date = new Date();
@@ -31,21 +31,19 @@ export class ExpensesComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private store: Store<AppState>, private dialog: MatDialog) {}
+  constructor(private store: Store<AppState>, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit() {
-    const formatter = new Intl.DateTimeFormat('en', { month: 'long' });
-    const date = new Date();
-    console.log(formatter.format(date));
-
     this.requesting$ = this.store.select(fromStore.selectExpensesRequesting);
 
     this.store.dispatch(new GetExpensesRequestAction({year: this.year, month: this.month}));
     this.store.select(fromStore.selectExpensesAll).subscribe((expenses) => {
-      this.dataSource = new MatTableDataSource();
-      this.dataSource.data = expenses;
-      this.dataSource.sort = this.sort;
+      this.expenses = expenses;
+      this.income = this.calculateIncome(this.expenses);
+      this.expense =  this.calculateExpense(this.expenses);
     });
+
+    console.log(this.route.snapshot.params);
   }
 
   onDialogOpen() {
@@ -61,10 +59,8 @@ export class ExpensesComponent implements OnInit {
     this.showDelete = !this.showDelete;
   }
 
-  deleteExpense(row) {
-    console.log(row);
-    this.deletingExpense = row.id;
-    this.store.dispatch(new DeleteExpensesRequestAction({id: row.id}));
+  deleteExpense(expense) {
+    this.store.dispatch(new DeleteExpensesRequestAction({ id: expense.id }));
     this.requesting$.subscribe((requesting) => {
         if (!requesting) {
           this.showDelete = false;
@@ -72,4 +68,13 @@ export class ExpensesComponent implements OnInit {
     });
   }
 
+  calculateIncome(expenses: Expense[]) {
+    return expenses.filter(expense => expense.type === 'income')
+      .reduce((accumulator, expense) => accumulator + expense.amount, 0);
+  }
+
+  calculateExpense(expenses: Expense[]) {
+    return expenses.filter(expense => expense.type === 'expense')
+      .reduce((accumulator, expense) => accumulator + expense.amount, 0);
+  }
 }

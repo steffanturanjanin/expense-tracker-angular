@@ -79,6 +79,15 @@ export class AddExpenseFormComponent implements OnInit {
     }
   }
 
+  onSelectTypeChange(event) {
+    if (event.value.toString() === '1') {
+      this.form.get('category').reset(null);
+      this.form.get('category').disable();
+    } else {
+      this.form.get('category').enable();
+    }
+  }
+
   formatValue(e) {
     if (e.target.value > 2147483647) {
       e.target.value = 2147483647;

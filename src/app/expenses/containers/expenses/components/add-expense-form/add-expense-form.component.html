@@ -47,7 +47,7 @@
     <mat-grid-tile colspan="2" rowspan="1">
       <mat-form-field style="width: 90%">
         <mat-label>Type</mat-label>
-        <mat-select formControlName="type" required>
+        <mat-select formControlName="type" (selectionChange)="onSelectTypeChange($event)" required>
           <mat-option value="0"><i class="fa fa-arrow-up"></i>Expense</mat-option>
           <mat-option value="1"><i class="fa fa-arrow-down"></i>Income</mat-option>
         </mat-select>

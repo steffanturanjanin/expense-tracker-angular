@@ -1,0 +1,33 @@
+table {
+  width: 100%;
+  margin-top: 2%;
+  margin-bottom: 5%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.category-icon {
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+.action-icon {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.income {}
+
+.income td {
+  color: #64DD17;
+  font-weight: 500;
+}
+
+.expense {}
+
+.expense td {
+  color: #FF5252;
+  font-weight: 500;
+}

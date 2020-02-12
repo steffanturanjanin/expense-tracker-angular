@@ -12,11 +12,13 @@ import {StoreModule} from '@ngrx/store';
 import {reducers} from './store/reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {effects} from './store/effects';
+import { ExpensesTableComponent } from './containers/expenses/components/expenses-table/expenses-table.component';
 
 @NgModule({
   declarations: [
     ExpensesComponent,
     AddExpenseFormComponent,
+    ExpensesTableComponent,
 
   ],
   imports: [

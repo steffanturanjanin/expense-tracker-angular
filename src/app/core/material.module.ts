@@ -4,7 +4,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
   MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatError,
-  MatSidenavModule, MatListModule, MatGridListModule, MatSortModule, MatOptionModule, MatSelectModule, MAT_DIALOG_DEFAULT_OPTIONS
+  MatSidenavModule, MatListModule, MatGridListModule, MatSortModule, MatOptionModule,
+  MatSelectModule, MatProgressBarModule, MatDividerModule, MAT_DIALOG_DEFAULT_OPTIONS
 } from '@angular/material';
 @NgModule({
   declarations: [
@@ -27,6 +28,8 @@ import {
     FlexLayoutModule,
     MatSortModule,
     MatSelectModule,
+    MatProgressBarModule,
+    MatDividerModule,
     MatOptionModule
   ],
   exports: [
@@ -47,6 +50,8 @@ import {
     FlexLayoutModule,
     MatSortModule,
     MatSelectModule,
+    MatProgressBarModule,
+    MatDividerModule,
     MatOptionModule
   ],
   providers: [

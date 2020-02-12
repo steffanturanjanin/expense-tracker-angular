@@ -1,57 +1,45 @@
-<mat-toolbar style="width: 100%; height: 50px; background-color: #8B30B2">
+
+<!-- separate component -->
+<mat-toolbar>
   <mat-grid-list cols="12">
-    <a mat-button color="primary" style="font-size: 16px; margin-right: 10px; color: white" (click)="onDialogOpen()">Add expense</a>
-    <a mat-button color="primary" style="font-size: 16px; margin-right: 10px; color: white" (click)="onShowDelete()">Delete expense</a>
-    <a mat-button color="primary" style="font-size: 16px; margin-right: 10px; color: white">Update expense</a>
+    <a mat-button color="primary"  (click)="onDialogOpen()">Add expense</a>
+    <a mat-button color="primary" (click)="onShowDelete()">Delete expense</a>
+    <a mat-button color="primary">Update expense</a>
   </mat-grid-list>
 </mat-toolbar>
 
-<h2 style="font-weight: 500; margin-left: 5%"> Monthly report for {{monthName}} {{year}} </h2>
+<div style="margin-left: 5%; margin-right: 5%">
 
-<div style="display: flex; justify-content: center;">
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="margin-top: 5%;">
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center"> id </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
-  <ng-container matColumnDef="category">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> category </th>
-    <td mat-cell *matCellDef="let element"><i class="fa {{element.type === 'income' ? 'fa fa-arrow-up' : element.category.icon}}" style="font-size: 20px; margin-right: 8px"></i> {{element.category.name}} </td>
-  </ng-container>
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-  <ng-container matColumnDef="amount">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> amount </th>
-    <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
-  </ng-container>
-  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> date </th>
-    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-  </ng-container>
-  <ng-container matColumnDef="type">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> type </th>
-    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-  </ng-container>
+  <h2> Monthly report for {{monthName}} {{year}} </h2>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>  </th>
-    <td mat-cell *matCellDef="let row">
-      <i *ngIf="showDelete" (click)="deleteExpense(row)" class="fa fa-trash" style="font-size: 18px; cursor: pointer"></i>
-    </td>
-  </ng-container>
+  <mat-grid-list [cols]="3" rowHeight="100px" >
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-card>
+        <p>Income {{income}}$</p>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-card>
+        <p>Expenses {{expense}}$</p>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-card>
+        <div>
+          <p>Balance {{income - expense}}$</p>
+          <mat-progress-bar value="{{100*(income - expense)/income}}"></mat-progress-bar>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 
-  <ng-container matColumnDef="loader">
-    <th mat-header-cell *matHeaderCellDef> </th>
-    <td mat-cell *matCellDef="let row">
-      <mat-spinner *ngIf="deletingExpense === row.id && (requesting$ | async)" [diameter]="30">
+  <mat-divider> </mat-divider>
 
-      </mat-spinner>
-    </td>
-  </ng-container>
+  <app-expenses-table
+    [expenses]="expenses"
+    [showDelete]="showDelete"
+    [requesting$]="requesting$"
+    (onExpenseDeleted)="deleteExpense($event)">
+  </app-expenses-table>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{expense: row.type === 'expense', income: row.type === 'income'}"></tr>
-</table>
 </div>
