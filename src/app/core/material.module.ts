@@ -5,7 +5,7 @@ import {
   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
   MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatError,
   MatSidenavModule, MatListModule, MatGridListModule, MatSortModule, MatOptionModule,
-  MatSelectModule, MatProgressBarModule, MatDividerModule, MAT_DIALOG_DEFAULT_OPTIONS
+  MatSelectModule, MatProgressBarModule, MatDividerModule, MatExpansionModule, MAT_DIALOG_DEFAULT_OPTIONS
 } from '@angular/material';
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import {
     MatSelectModule,
     MatProgressBarModule,
     MatDividerModule,
+    MatExpansionModule,
     MatOptionModule
   ],
   exports: [
@@ -52,6 +53,7 @@ import {
     MatSelectModule,
     MatProgressBarModule,
     MatDividerModule,
+    MatExpansionModule,
     MatOptionModule
   ],
   providers: [

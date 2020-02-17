@@ -5,6 +5,10 @@ export enum ExpensesActionTypes {
   CREATE_EXPENSE_SUCCESS = '[Expenses] Create Expense Success',
   CREATE_EXPENSE_FAILURE = '[Expenses] Create Expense Failure',
 
+  GET_ALL_EXPENSES_REQUEST = '[Expenses] Get All Expenses Request',
+  GET_ALL_EXPENSES_SUCCESS = '[Expenses] Get All Expenses Success',
+  GET_ALL_EXPENSES_FAILURE = '[Expenses] Get All Expenses Failure',
+
   GET_EXPENSES_REQUEST = '[Expenses] Get Expenses Request',
   GET_EXPENSES_SUCCESS = '[Expenses] Get Expenses Success',
   GET_EXPENSES_FAILURE = '[Expenses] Get Expenses Failure',
@@ -12,6 +16,8 @@ export enum ExpensesActionTypes {
   DELETE_EXPENSE_REQUEST = '[Expenses] Delete Expense Request',
   DELETE_EXPENSE_SUCCESS = '[Expenses] Delete Expense Success',
   DELETE_EXPENSE_FAILURE = '[Expenses] Delete Expense Failure',
+
+  REMOVE_EXPENSES = '[Expenses] Remove Expenses'
 }
 
 export class CreateExpenseRequestAction implements Action {
@@ -26,6 +32,21 @@ export class CreateExpenseSuccessAction implements Action {
 
 export class CreateExpenseFailureAction implements Action {
   readonly type = ExpensesActionTypes.CREATE_EXPENSE_FAILURE;
+  constructor(public payload: any) {}
+}
+
+export class GetAllExpensesRequestAction implements Action {
+  readonly type = ExpensesActionTypes.GET_ALL_EXPENSES_REQUEST;
+  constructor() {}
+}
+
+export class GetAllExpensesSuccessAction implements Action {
+  readonly type = ExpensesActionTypes.GET_ALL_EXPENSES_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class GetAllExpensesFailureAction implements Action {
+  readonly type = ExpensesActionTypes.GET_ALL_EXPENSES_FAILURE;
   constructor(public payload: any) {}
 }
 
@@ -59,6 +80,10 @@ export class DeleteExpensesFailureAction implements Action {
   constructor(public payload: any) {}
 }
 
+export class RemoveExpenses implements Action {
+  readonly type = ExpensesActionTypes.REMOVE_EXPENSES;
+}
+
 export type ExpensesActions =
   | CreateExpenseRequestAction
   | CreateExpenseSuccessAction
@@ -66,6 +91,10 @@ export type ExpensesActions =
   | GetExpensesRequestAction
   | GetExpensesSuccessAction
   | GetExpensesFailureAction
+  | GetAllExpensesRequestAction
+  | GetAllExpensesSuccessAction
+  | GetAllExpensesFailureAction
   | DeleteExpensesRequestAction
   | DeleteExpensesSuccessAction
-  | DeleteExpensesFailureAction;
+  | DeleteExpensesFailureAction
+  | RemoveExpenses;

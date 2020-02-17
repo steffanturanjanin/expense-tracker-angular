@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,13 +22,15 @@ import { CategoriesModule } from './categories/categories.module';
 import {AuthenticatedLayoutComponent} from './shared/layouts/authenticated-layout/authenticated-layout.component';
 import {AuthenticationLayoutComponent} from './shared/layouts/authentication-layout/authentication-layout.component';
 import {HeaderComponent} from './shared/components/header/header.component';
+import {DashboardModule} from './dashboard/dashboard.module';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthenticatedLayoutComponent,
+    /*AuthenticatedLayoutComponent,
     AuthenticationLayoutComponent,
-    HeaderComponent
+    HeaderComponent*/
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,9 @@ import {HeaderComponent} from './shared/components/header/header.component';
     ExpensesModule,
     CategoriesModule,
     CoreModule,
+    SharedModule,
+    ChartsModule,
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

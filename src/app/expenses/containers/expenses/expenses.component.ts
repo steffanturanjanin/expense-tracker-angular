@@ -7,8 +7,11 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../../../app.state';
 import {DeleteExpensesRequestAction, GetExpensesRequestAction} from '../../store/actions/expenses.actions';
 import * as fromStore from '../../store/reducers/index';
+import * as fromCategoriesStore from '../../../categories/store/reducers/index';
 import { Expense } from '../../../shared/models/expense/expense';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Category} from '../../../shared/models/category/category';
+import {GetCategoriesRequestAction} from '../../../categories/store/actions/categories.actions';
 
 @Component({
   selector: 'app-expenses',
@@ -17,6 +20,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 
 export class ExpensesComponent implements OnInit {
+  categories$: Observable<Category[]>;
+  expenses$: Observable<Expense[]>;
   requesting$: Observable<boolean>;
   showDelete = false;
   expenses: Expense[];
@@ -37,7 +42,12 @@ export class ExpensesComponent implements OnInit {
     this.requesting$ = this.store.select(fromStore.selectExpensesRequesting);
 
     this.store.dispatch(new GetExpensesRequestAction({year: this.year, month: this.month}));
-    this.store.select(fromStore.selectExpensesAll).subscribe((expenses) => {
+    this.store.dispatch(new GetCategoriesRequestAction());
+
+    this.categories$ = this.store.select(fromCategoriesStore.selectCategoriesAll);
+    this.expenses$ = this.store.select(fromStore.selectExpensesAll);
+
+    this.expenses$.subscribe((expenses) => {
       this.expenses = expenses;
       this.income = this.calculateIncome(this.expenses);
       this.expense =  this.calculateExpense(this.expenses);

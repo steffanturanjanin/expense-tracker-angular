@@ -52,6 +52,24 @@ export function reducer(state: State = initialState, action: ExpensesActions) {
         error: action.payload.error
       };
     }
+    case ExpensesActionTypes.GET_ALL_EXPENSES_REQUEST: {
+      return {
+        ...state,
+        requesting: true,
+        error: null
+      };
+    }
+    case ExpensesActionTypes.GET_ALL_EXPENSES_SUCCESS: {
+      return adapter.addMany(action.payload.expenses,
+        { ...state, requesting: false, error: null });
+    }
+    case ExpensesActionTypes.GET_ALL_EXPENSES_FAILURE: {
+      return {
+        ...state,
+        requesting: false,
+        error: action.payload.error
+      };
+    }
     case ExpensesActionTypes.DELETE_EXPENSE_REQUEST: {
       return {
         ...state,
@@ -69,6 +87,9 @@ export function reducer(state: State = initialState, action: ExpensesActions) {
         requesting: false,
         error: action.payload.error
       };
+    }
+    case ExpensesActionTypes.REMOVE_EXPENSES: {
+      return adapter.removeAll({ ...state });
     }
     default:
       return state;

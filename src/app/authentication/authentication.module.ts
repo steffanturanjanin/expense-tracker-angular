@@ -14,6 +14,7 @@ import { reducers } from './store/reducers';
 import { effects } from './store/effects';
 
 import { AuthenticationLayoutComponent } from '../shared/layouts/authentication-layout/authentication-layout.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AuthenticationLayoutComponent } from '../shared/layouts/authentication-
     StoreModule.forFeature('authenticationFeature', reducers),
     EffectsModule.forFeature(effects),
     CustomMaterialModule,
+    SharedModule
   ],
   exports: [
     SignUpComponent,

@@ -1,0 +1,53 @@
+<div style=" float: right;
+    width: 12%;
+    height: 150vh;
+    background-color: #424242">
+  <mat-accordion *ngFor="let year of months$ | async | keyvalue">
+    <mat-expansion-panel style="margin-top: 5px">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{year.key}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p style="cursor: pointer" *ngFor="let month of year.value" (click)="onMonthReportClick(year.key, month.number)">
+        {{month.name}}
+      </p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<div style="margin: 20px; width: 85%">
+  <mat-grid-list cols="12" rowHeight="150px">
+    <mat-grid-tile colspan="6" rowspan="3">
+      <mat-card style="width: 100%">
+        <mat-card-title style="text-align: center">
+          Total expenses by category
+        </mat-card-title>
+        <app-pie-chart
+          [expenses$]="expenses$"
+          [categories$]="categories$">
+        </app-pie-chart>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="6" rowspan="3">
+      <mat-card style="width: 100%">
+        <mat-card-title>
+          bla
+        </mat-card-title>
+        <app-bar-chart
+          [expenses$]="expenses$"
+          [categories$]="categories$"
+          [requestingExpenses$]="requestingExpenses$"
+          [requestingCategories$]="requestingCategories$">
+        </app-bar-chart>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="12" rowspan="3">
+      <mat-card style="width: 100%">
+        <app-overall-expense-report-bar-chart
+          [report$]="report$">
+        </app-overall-expense-report-bar-chart>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</div>

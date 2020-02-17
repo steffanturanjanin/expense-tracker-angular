@@ -5,9 +5,14 @@ import {Observable, of} from 'rxjs';
 import {
   CreateExpenseFailureAction,
   CreateExpenseRequestAction,
-  CreateExpenseSuccessAction, DeleteExpensesFailureAction, DeleteExpensesRequestAction, DeleteExpensesSuccessAction,
+  CreateExpenseSuccessAction,
+  DeleteExpensesFailureAction,
+  DeleteExpensesRequestAction,
+  DeleteExpensesSuccessAction,
   ExpensesActions,
-  ExpensesActionTypes, GetExpensesFailureAction, GetExpensesSuccessAction
+  ExpensesActionTypes, GetAllExpensesFailureAction, GetAllExpensesSuccessAction,
+  GetExpensesFailureAction,
+  GetExpensesSuccessAction
 } from '../actions/expenses.actions';
 import {catchError, map, pluck, switchMap} from 'rxjs/operators';
 
@@ -34,17 +39,29 @@ export class ExpensesEffects {
 
   @Effect()
   getExpensesRequestAction$: Observable<any> = this.actions.pipe(
-    ofType<ExpensesActions>(ExpensesActionTypes.GET_EXPENSES_REQUEST),
+    ofType<ExpensesActions>(ExpensesActionTypes.GET_EXPENSES_REQUEST, ExpensesActionTypes.GET_ALL_EXPENSES_REQUEST),
     switchMap((action: ExpensesActions) => {
-      if (action.type === ExpensesActionTypes.GET_EXPENSES_REQUEST) {
-        return this.expensesService.getExpensesForMonth(action.payload.year, action.payload.month).pipe(
-          map((response) => {
-            return new GetExpensesSuccessAction({ expenses: response });
-          }),
-          catchError((error) => {
-            return of(new GetExpensesFailureAction({ error }));
-          })
-        );
+      switch (action.type) {
+        case ExpensesActionTypes.GET_EXPENSES_REQUEST: {
+          return this.expensesService.getExpensesForMonth(action.payload.year, action.payload.month).pipe(
+            map((response) => {
+              return new GetExpensesSuccessAction({ expenses: response });
+            }),
+            catchError((error) => {
+              return of(new GetExpensesFailureAction({ error }));
+            })
+          );
+        }
+        case ExpensesActionTypes.GET_ALL_EXPENSES_REQUEST: {
+          return this.expensesService.getAllExpenses().pipe(
+            map((response) => {
+              return new GetAllExpensesSuccessAction({ expenses: response });
+            }),
+            catchError((error) => {
+              return of(new GetAllExpensesFailureAction({ error }));
+            })
+          );
+        }
       }
     })
   );

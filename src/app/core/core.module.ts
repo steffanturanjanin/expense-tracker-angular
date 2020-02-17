@@ -10,6 +10,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CategoriesService } from './services/categories/categories.service';
 import { ExpensesService } from './services/expenses/expenses.service';
+import {ReportsService} from './services/reports/reports.service';
 
 @NgModule({
   declarations: [],
@@ -22,6 +23,7 @@ import { ExpensesService } from './services/expenses/expenses.service';
     LoggedInGuardService,
     CategoriesService,
     ExpensesService,
+    ReportsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
