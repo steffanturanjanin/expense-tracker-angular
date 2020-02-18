@@ -20,6 +20,7 @@ import {GetMonthListRequestAction} from '../../store/actions/months.actions';
 })
 export class DashboardComponent implements OnInit {
   report$: Observable<any>;
+  reportType$: Observable<string>;
   months$: Observable<any>;
   expenses$: Observable<Expense[]>;
   categories$: Observable<Category[]>;
@@ -36,6 +37,7 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(new GetMonthListRequestAction());
 
     this.report$ = this.store.select(fromDashboardStore.selectReport);
+    this.reportType$ = this.store.select(fromDashboardStore.selectReportType);
     this.expenses$ = this.store.select(fromExpensesStore.selectExpensesAll);
     this.categories$ = this.store.select(fromCategoriesStore.selectCategoriesAll);
     this.months$ = this.store.select(fromDashboardStore.selectMonths);
@@ -48,5 +50,11 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(new GetMonthlyReportRequestAction({ year, month }));
     this.store.dispatch(new RemoveExpenses());
     this.store.dispatch(new GetExpensesRequestAction({ year, month }));
+  }
+
+  onOverallReportClick() {
+    this.store.dispatch(new GetAllReportsRequestAction());
+    this.store.dispatch(new RemoveExpenses());
+    this.store.dispatch(new GetAllExpensesRequestAction());
   }
 }

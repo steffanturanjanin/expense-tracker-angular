@@ -11,6 +11,7 @@ import { BarChartComponent } from './components/charts/bar-chart/bar-chart.compo
 import {
   OverallExpenseReportBarChartComponent
 } from './components/charts/overall-expense-report-bar-chart/overall-expense-report-bar-chart.component';
+import { MonthlyExpenseReportBarChartComponent } from './components/charts/monthly-expense-report-bar-chart/monthly-expense-report-bar-chart.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {
     AuthenticatedLayoutComponent,
     PieChartComponent,
     BarChartComponent,
-    OverallExpenseReportBarChartComponent
+    OverallExpenseReportBarChartComponent,
+    MonthlyExpenseReportBarChartComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import {
     AuthenticationLayoutComponent,
     PieChartComponent,
     BarChartComponent,
-    OverallExpenseReportBarChartComponent
+    OverallExpenseReportBarChartComponent,
+    MonthlyExpenseReportBarChartComponent
   ]
 })
 export class SharedModule { }

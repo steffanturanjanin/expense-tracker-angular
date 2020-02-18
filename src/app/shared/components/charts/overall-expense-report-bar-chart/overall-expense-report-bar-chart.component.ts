@@ -51,13 +51,14 @@ export class OverallExpenseReportBarChartComponent implements OnInit {
             dataset.data.push(0);
           }
         });
+        this.barChartLabels = [];
         Object.keys(report).forEach((key, index) => {
           this.barChartLabels.push(key);
           report[key].forEach((month) => {
-            const spending = month.expenses.filter((expense) => expense.type === 0)
+            const spending = month.expenses.filter((expense) => expense.type === 'expense')
               .reduce((accumulator, currentValue) => {
                 return accumulator + currentValue.amount;
-            }, 0);
+              }, 0);
             this.barChartData[month.number - 1].data[index] = spending;
           });
         });
