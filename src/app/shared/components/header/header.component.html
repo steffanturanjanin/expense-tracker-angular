@@ -1,14 +1,17 @@
 <mat-toolbar color="primary">
   <i class="fa fa-bars" (click)="drawer.toggle()"></i>
-  <span>Expense Tracker</span>
+  <span style="cursor: pointer" routerLink="/">
+    Expense Tracker
+  </span>
 
   <!-- This fills the remaining space of the current row -->
   <span class="example-fill-remaining-space"></span>
 
-  <div class="logout-button-container">
+  <div class="logout-button-container" style="position: absolute; right: 2.5%">
     <span class="user-email" *ngIf="user !== null">{{user.email}}</span>
-    <button mat-raised-button color="white">
-      <span>Logout</span> <i class="fa fa-sign-out"></i>
+    <button mat-raised-button color="white" (click)="onLoggedOut()">
+      <span>Logout</span>
+      <i class="fa fa-sign-out"></i>
     </button>
   </div>
 </mat-toolbar>
@@ -16,8 +19,11 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #drawer mode="side" opened role="navigation">
     <mat-nav-list>
-      <a mat-list-item routerLink='/first'>First Component</a>
-      <a mat-list-item routerLink='/second'>Second Component</a>
+      <a mat-list-item routerLink='/'><i class="fa fa-home" style="font-weight: 500; padding: 6px 8px 6px 16px; text-decoration: none; font-size: 24px; color: #bcb7b7; display: block;"></i>Home</a>
+      <a mat-list-item routerLink='/dashboard'><i class="fa fa-columns" style="font-weight: 500; padding: 6px 8px 6px 16px; text-decoration: none; font-size: 24px; color: #bcb7b7; display: block;"></i>Dashboard</a>
+      <a mat-list-item routerLink='/expenses'><i class="fa fa-money" style="font-weight: 500; padding: 6px 8px 6px 16px; text-decoration: none; font-size: 24px; color: #bcb7b7; display: block;"></i>Expenses</a>
+      <a mat-list-item routerLink='/categories'><i class="fa fa-list" style="font-weight: 500; padding: 6px 8px 6px 16px; text-decoration: none; font-size: 24px; color: #bcb7b7; display: block;"></i>Categories</a>
+      <a mat-list-item routerLink='/categories/create-category'><i class="fa fa-plus-square" style="font-weight: 500; padding: 6px 8px 6px 16px; text-decoration: none; font-size: 24px; color: #bcb7b7; display: block;"></i>Create Category</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

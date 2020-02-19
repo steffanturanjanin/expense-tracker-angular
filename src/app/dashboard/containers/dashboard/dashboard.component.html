@@ -1,7 +1,8 @@
-<div style=" float: right;
+<!--<div style=" float: right;
     width: 12%;
-    height: 150vh;
-    background-color: #424242">
+    height: 160vh;
+    background-color: #424242">-->
+<div style="position: absolute; display: block; top:0; bottom: 0; right: 0; height: 160vh; width: 12%; background-color: #424242">
   <button style="width: 100%; height: 48px; font-size: 18px; border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px; box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);" mat-button (click)="onOverallReportClick()">Overall</button>
   <mat-accordion *ngFor="let year of months$ | async | keyvalue">
@@ -11,30 +12,41 @@
           {{year.key}}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <p style="cursor: pointer" *ngFor="let month of year.value" (click)="onMonthReportClick(year.key, month.number)">
+      <p style="cursor: pointer" *ngFor="let month of year.value" (click)="onMonthReportClick(year.key, month.number, month.name)">
         {{month.name}}
       </p>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
 <div style="margin: 20px; width: 85%">
+  <h1>Dashboard</h1>
+  <p>{{reportPeriod}}</p>
+  <mat-divider style="margin-bottom: 10px"></mat-divider>
   <mat-grid-list cols="12" rowHeight="150px">
-    <mat-grid-tile colspan="5" rowspan="3">
+    <mat-grid-tile colspan="6" rowspan="3">
       <mat-card style="width: 100%">
         <mat-card-title style="text-align: center">
           Total expenses by category
         </mat-card-title>
+        <mat-spinner [diameter]="60" *ngIf="(requestingCategories$ | async) || (requestingExpenses$ | async)">
+
+        </mat-spinner>
         <app-pie-chart
           [expenses$]="expenses$"
-          [categories$]="categories$">
+          [categories$]="categories$"
+          [requestingExpenses$]="requestingExpenses$"
+          [requestingCategories$]="requestingCategories$">
         </app-pie-chart>
       </mat-card>
     </mat-grid-tile>
-    <mat-grid-tile colspan="5" rowspan="3">
+    <mat-grid-tile colspan="6" rowspan="3">
       <mat-card style="width: 100%">
-        <mat-card-title>
-          bla
+        <mat-card-title style="text-align: center">
+          Categories by consumption
         </mat-card-title>
+        <mat-spinner [diameter]="60" *ngIf="(requestingCategories$ | async) || (requestingExpenses$ | async)">
+
+        </mat-spinner>
         <app-bar-chart
           [expenses$]="expenses$"
           [categories$]="categories$"
@@ -43,20 +55,20 @@
         </app-bar-chart>
       </mat-card>
     </mat-grid-tile>
-    <mat-grid-tile colspan="2" rowspan="3">
-      <mat-card style="width: 100%; height: 100%">
-
-      </mat-card>
-    </mat-grid-tile>
     <mat-grid-tile colspan="12" rowspan="3">
       <mat-card style="width: 100%; text-align: center">
+        <mat-spinner [diameter]="60" *ngIf="(requestingReport$ | async)">
+
+        </mat-spinner>
         <app-overall-expense-report-bar-chart style="margin: auto"
           *ngIf="(reportType$ | async) === 'overall'"
-          [report$]="report$">
+          [report$]="report$"
+          [requestingReport$]="requestingReport$">
         </app-overall-expense-report-bar-chart>
         <app-monthly-expense-report-bar-chart style="margin: auto"
           *ngIf="(reportType$ | async) === 'monthly'"
-          [report$]="report$">
+          [report$]="report$"
+          [requestingReport$]="requestingReport$">
         </app-monthly-expense-report-bar-chart>
       </mat-card>
     </mat-grid-tile>

@@ -42,16 +42,17 @@ import {SharedModule} from './shared/shared.module';
       logOnly: environment.production
     }),
     EffectsModule.forRoot([]),
-    AppRoutingModule,
+
     BrowserAnimationsModule,
     CustomMaterialModule,
-    AuthenticationModule,
     ExpensesModule,
     CategoriesModule,
     CoreModule,
     SharedModule,
     ChartsModule,
-    DashboardModule
+    DashboardModule,
+    AuthenticationModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,9 +1,9 @@
-import {Component, OnInit, Renderer2} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../store/reducers/index';
-import {Observable} from 'rxjs';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {LoginRequestAction} from '../../store/actions/auth.actions';
+import { Observable } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginRequestAction } from '../../store/actions/auth.actions';
 
 @Component({
   selector: 'app-log-in',
@@ -18,9 +18,7 @@ export class LogInComponent implements OnInit {
     password: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.nullValidator])
   });
 
-  constructor(private store: Store<fromStore.AuthState>, private renderer: Renderer2) {
-    this.renderer.setStyle(document.body, 'background-color', '#ffeaa7');
-  }
+  constructor(private store: Store<fromStore.AuthState>) {}
 
   ngOnInit() {
     this.requesting$ = this.store.select(fromStore.getAuthRequesting);

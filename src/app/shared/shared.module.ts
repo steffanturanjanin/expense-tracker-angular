@@ -12,6 +12,7 @@ import {
   OverallExpenseReportBarChartComponent
 } from './components/charts/overall-expense-report-bar-chart/overall-expense-report-bar-chart.component';
 import { MonthlyExpenseReportBarChartComponent } from './components/charts/monthly-expense-report-bar-chart/monthly-expense-report-bar-chart.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MonthlyExpenseReportBarChartComponent } from './components/charts/month
     PieChartComponent,
     BarChartComponent,
     OverallExpenseReportBarChartComponent,
-    MonthlyExpenseReportBarChartComponent
+    MonthlyExpenseReportBarChartComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { MonthlyExpenseReportBarChartComponent } from './components/charts/month
     PieChartComponent,
     BarChartComponent,
     OverallExpenseReportBarChartComponent,
-    MonthlyExpenseReportBarChartComponent
+    MonthlyExpenseReportBarChartComponent,
+    NotFoundComponent
   ]
 })
 export class SharedModule { }

@@ -13,6 +13,8 @@ export class PieChartComponent implements OnInit, OnChanges {
 
   @Input() expenses$: Observable<Expense[]>;
   @Input() categories$: Observable<Category[]>;
+  @Input() requestingExpenses$: Observable<boolean>;
+  @Input() requestingCategories$: Observable<boolean>;
 
   // expenses: Expense[] = [];
   // categories: Category[] = [];

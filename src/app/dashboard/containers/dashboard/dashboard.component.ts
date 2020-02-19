@@ -26,11 +26,14 @@ export class DashboardComponent implements OnInit {
   categories$: Observable<Category[]>;
   requestingExpenses$: Observable<boolean>;
   requestingCategories$: Observable<boolean>;
+  requestingReport$: Observable<boolean>;
+  reportPeriod = 'Overall Report';
 
   constructor(private store: Store<AppState>) {
   }
 
   ngOnInit() {
+    this.store.dispatch(new RemoveExpenses());
     this.store.dispatch(new GetAllReportsRequestAction());
     this.store.dispatch(new GetAllExpensesRequestAction());
     this.store.dispatch(new GetCategoriesRequestAction());
@@ -44,17 +47,20 @@ export class DashboardComponent implements OnInit {
 
     this.requestingExpenses$ = this.store.select(fromExpensesStore.selectExpensesRequesting);
     this.requestingCategories$ = this.store.select(fromCategoriesStore.selectCategoriesRequesting);
+    this.requestingReport$ = this.store.select(fromDashboardStore.selectReportRequesting);
   }
 
-  onMonthReportClick(year: number, month: number) {
+  onMonthReportClick(year: number, month: number, name: string) {
     this.store.dispatch(new GetMonthlyReportRequestAction({ year, month }));
     this.store.dispatch(new RemoveExpenses());
     this.store.dispatch(new GetExpensesRequestAction({ year, month }));
+    this.reportPeriod = 'Monthly Report - ' + name + ' ' + year;
   }
 
   onOverallReportClick() {
     this.store.dispatch(new GetAllReportsRequestAction());
     this.store.dispatch(new RemoveExpenses());
     this.store.dispatch(new GetAllExpensesRequestAction());
+    this.reportPeriod = 'Overall Report';
   }
 }

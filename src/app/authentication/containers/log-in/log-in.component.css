@@ -34,3 +34,11 @@ mat-spinner {
   display: inline-block;
   margin-top: 10px;
 }
+
+a {
+  color: #9b5fe2;
+}
+
+p {
+  margin: 0;
+}

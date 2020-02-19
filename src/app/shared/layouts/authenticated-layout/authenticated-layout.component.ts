@@ -3,6 +3,7 @@ import {User} from '../../models/user/user';
 import {AppState} from '../../../app.state';
 import {Store} from '@ngrx/store';
 import * as fromAuthStore from '../../../authentication/store/reducers/index';
+import {LogoutRequestAction} from '../../../authentication/store/actions/auth.actions';
 
 @Component({
   selector: 'app-authenticated-layout',
@@ -15,6 +16,10 @@ export class AuthenticatedLayoutComponent implements OnInit {
 
   ngOnInit() {
     this.store.select(fromAuthStore.getAuthUser).subscribe((user) => this.user = user);
+  }
+
+  onLoggedOut() {
+    this.store.dispatch(new LogoutRequestAction());
   }
 
 }

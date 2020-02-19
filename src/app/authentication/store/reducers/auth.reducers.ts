@@ -100,6 +100,27 @@ export function reducer(state = initialState, action: AuthActions): State {
         ...state
       };
     }
+    case AuthActionTypes.LOGOUT_REQUEST: {
+      return {
+        ...state,
+        requesting: true
+      };
+    }
+    case AuthActionTypes.LOGOUT_SUCCESS: {
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null,
+        requesting: false
+      };
+    }
+    case AuthActionTypes.LOGOUT_FAILURE: {
+      return {
+        ...state,
+        requesting: false,
+        error: action.payload.error
+      };
+    }
     default: {
       return state;
     }

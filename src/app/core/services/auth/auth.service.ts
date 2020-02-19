@@ -29,4 +29,8 @@ export class AuthService {
   getAuthenticatedUser() {
     return this.http.get<User>('http://localhost:8000/api/auth/user');
   }
+
+  logout(): Observable<any> {
+    return this.http.post<any>('http://localhost:8000/api/auth/logout', {});
+  }
 }

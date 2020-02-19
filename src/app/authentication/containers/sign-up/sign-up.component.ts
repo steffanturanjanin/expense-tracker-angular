@@ -1,6 +1,5 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthState } from '../../store/reducers';
 import * as fromStore from '../../store/reducers/index';
 import { SignUpRequestAction } from '../../store/actions/auth.actions';
 import { Observable } from 'rxjs';
@@ -19,9 +18,7 @@ export class SignUpComponent implements OnInit {
     password: new FormControl()
   });
 
-  constructor(private store: Store<fromStore.AuthState>, private renderer: Renderer2) {
-    this.renderer.setStyle(document.body, 'background-color', '#ffeaa7');
-  }
+  constructor(private store: Store<fromStore.AuthState>) {}
 
   ngOnInit() {
     this.requesting$ = this.store.select(fromStore.getAuthRequesting);

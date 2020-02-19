@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user/user';
 
@@ -10,6 +10,7 @@ import { User } from '../../models/user/user';
 export class HeaderComponent implements OnInit {
   showSidebar: boolean;
   @Input() user: User;
+  @Output() loggedOut: EventEmitter<boolean> = new EventEmitter();
 
   constructor() {
     this.showSidebar = true;
@@ -18,8 +19,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleShowSidebar() {
-    this.showSidebar = !this.showSidebar;
+  onLoggedOut() {
+    this.loggedOut.emit(true);
   }
 
 }

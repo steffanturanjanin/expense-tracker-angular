@@ -10,6 +10,7 @@ import {Label} from 'ng2-charts';
 })
 export class OverallExpenseReportBarChartComponent implements OnInit {
   @Input() report$: Observable<any>;
+  @Input() requestingReport$: Observable<boolean>;
   constructor() {}
 
   public barChartOptions: ChartOptions = {

@@ -11,7 +11,7 @@ import {
   AuthActionTypes,
   GetAuthenticatedUserFailureAction,
   GetAuthenticatedUserRequestAction,
-  GetAuthenticatedUserSuccessAction
+  GetAuthenticatedUserSuccessAction, LogoutFailureAction, LogoutSuccessAction
 } from '../actions/auth.actions';
 import {
   SignUpRequestAction, SignUpSuccessAction, SignUpFailureAction,
@@ -63,7 +63,7 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   loginSuccessAction$ = this.actions.pipe(
     ofType<AuthActions>(AuthActionTypes.LOGIN_SUCCESS, AuthActionTypes.SIGNUP_SUCCESS),
-    map((action) => action.payload),
+    map((action: LoginSuccessAction | SignUpSuccessAction) => action.payload), // note that this types for action is added
     tap((payload) => {
       localStorage.setItem('token', payload.token);
       this.router.navigateByUrl('/expenses');
@@ -83,6 +83,30 @@ export class AuthEffects {
           return of(new GetAuthenticatedUserFailureAction( {error}));
         })
       );
+    })
+  );
+
+  @Effect()
+  logoutRequestAction$ = this.actions.pipe(
+    ofType<AuthActions>(AuthActionTypes.LOGOUT_REQUEST),
+    switchMap(() => {
+      return this.authService.logout().pipe(
+        map((response) => {
+          return new LogoutSuccessAction();
+        }),
+        catchError((error) => {
+          return of(new LogoutFailureAction( { error }));
+        })
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  logoutSuccessAction$ = this.actions.pipe(
+    ofType<AuthActions>(AuthActionTypes.LOGOUT_SUCCESS),
+    tap(() => {
+      localStorage.removeItem('token');
+      this.router.navigateByUrl('/');
     })
   );
 }

@@ -3,9 +3,6 @@ import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Label} from 'ng2-charts';
 import {Observable} from 'rxjs';
 
-export interface MonthlyReport {
-  year
-}
 
 @Component({
   selector: 'app-monthly-expense-report-bar-chart',
@@ -14,6 +11,8 @@ export interface MonthlyReport {
 })
 export class MonthlyExpenseReportBarChartComponent implements OnInit {
   @Input() report$: Observable<any>;
+  @Input() requestingReport$: Observable<boolean>;
+
   constructor() { }
 
   public barChartOptions: ChartOptions = {

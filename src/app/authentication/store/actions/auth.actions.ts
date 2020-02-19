@@ -11,7 +11,11 @@ export enum AuthActionTypes {
 
   GET_AUTHENTICATED_USER_REQUEST = '[Auth] Get Authenticated User Request',
   GET_AUTHENTICATED_USER_SUCCESS = '[Auth] Get Authenticated User Success',
-  GET_AUTHENTICATED_USER_FAILURE = '[Auth] Get Authenticated User Failure'
+  GET_AUTHENTICATED_USER_FAILURE = '[Auth] Get Authenticated User Failure',
+
+  LOGOUT_REQUEST = '[Auth] Logout Request',
+  LOGOUT_SUCCESS = '[Auth] Logout Success',
+  LOGOUT_FAILURE = '[Auth] Logout Failure',
 }
 
 export class SignUpRequestAction implements Action {
@@ -59,6 +63,21 @@ export class GetAuthenticatedUserFailureAction implements Action {
   constructor(public payload: any) {}
 }
 
+export class LogoutRequestAction implements Action {
+  readonly type = AuthActionTypes.LOGOUT_REQUEST;
+  constructor() {}
+}
+
+export class LogoutSuccessAction implements Action {
+  readonly type = AuthActionTypes.LOGOUT_SUCCESS;
+  constructor() {}
+}
+
+export class LogoutFailureAction implements Action {
+  readonly type = AuthActionTypes.LOGOUT_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export type AuthActions =
   | SignUpRequestAction
   | SignUpSuccessAction
@@ -68,4 +87,7 @@ export type AuthActions =
   | LoginFailureAction
   | GetAuthenticatedUserRequestAction
   | GetAuthenticatedUserSuccessAction
-  | GetAuthenticatedUserFailureAction;
+  | GetAuthenticatedUserFailureAction
+  | LogoutRequestAction
+  | LogoutSuccessAction
+  | LogoutFailureAction;

@@ -13,11 +13,11 @@ import {User} from './shared/models/user/user';
 
 export class AppComponent implements OnInit {
   title = 'expense-tracker-angular';
-  user: User;
+  // user: User;
   constructor(private store: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.store.select(fromAuthStore.getAuthUser).subscribe((state) => this.user = state);
+    // this.store.select(fromAuthStore.getAuthUser).subscribe((state) => this.user = state);
   }
 }
