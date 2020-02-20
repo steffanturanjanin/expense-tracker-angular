@@ -11,8 +11,8 @@ import {
   DeleteExpensesSuccessAction,
   ExpensesActions,
   ExpensesActionTypes, GetAllExpensesFailureAction, GetAllExpensesSuccessAction,
-  GetExpensesFailureAction,
-  GetExpensesSuccessAction
+  GetExpensesByMonthFailureAction,
+  GetExpensesByMonthSuccessAction
 } from '../actions/expenses.actions';
 import {catchError, map, pluck, switchMap} from 'rxjs/operators';
 
@@ -39,16 +39,16 @@ export class ExpensesEffects {
 
   @Effect()
   getExpensesRequestAction$: Observable<any> = this.actions.pipe(
-    ofType<ExpensesActions>(ExpensesActionTypes.GET_EXPENSES_REQUEST, ExpensesActionTypes.GET_ALL_EXPENSES_REQUEST),
+    ofType<ExpensesActions>(ExpensesActionTypes.GET_EXPENSES_BY_MONTH_REQUEST, ExpensesActionTypes.GET_ALL_EXPENSES_REQUEST),
     switchMap((action: ExpensesActions) => {
       switch (action.type) {
-        case ExpensesActionTypes.GET_EXPENSES_REQUEST: {
-          return this.expensesService.getExpensesForMonth(action.payload.year, action.payload.month).pipe(
+        case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_REQUEST: {
+          return this.expensesService.getExpensesByMonth(action.payload.year, action.payload.month).pipe(
             map((response) => {
-              return new GetExpensesSuccessAction({ expenses: response });
+              return new GetExpensesByMonthSuccessAction({ expenses: response });
             }),
             catchError((error) => {
-              return of(new GetExpensesFailureAction({ error }));
+              return of(new GetExpensesByMonthFailureAction({ error }));
             })
           );
         }

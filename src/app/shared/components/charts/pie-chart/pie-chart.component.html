@@ -1,5 +1,5 @@
 <div>
-  <div style="display: block; width: 400px; height: 400px; margin: auto">
+  <div class="pie-chart-container">
     <canvas baseChart height="400px" width="400px" *ngIf="(expenses$ | async).length > 0"
             [data]="pieChartData"
             [labels]="pieChartLabels"
@@ -8,7 +8,7 @@
             [colors]="chartColors"
     >
     </canvas>
-    <div style="color:#7c7b7b; font-size: 24px; position: absolute; top: 50%; left: 50%; -moz-transform: translateX(-50%) translateY(-50%); -webkit-transform: translateX(-50%) translateY(-50%); transform: translateX(-50%) translateY(-50%);"
+    <div class="no-data"
       *ngIf="(expenses$ | async).length === 0 && !(requestingExpenses$ | async) && !(requestingCategories$ | async)">
       No data
     </div>

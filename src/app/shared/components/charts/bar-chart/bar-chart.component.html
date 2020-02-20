@@ -1,6 +1,6 @@
 <div>
   <div>
-    <div style="display: block; width: 400px; height: 400px; margin: auto">
+    <div class="bar-chart-container">
       <canvas *ngIf="(expenses$ | async).length > 0 && barChartData.length !== 0" baseChart width="400px" height="400px"
               [datasets]="barChartData"
               [labels]="barChartLabels"
@@ -9,8 +9,7 @@
               [chartType]="barChartType"
               [colors]="chartColors">
       </canvas>
-      <div style="color:#7c7b7b; font-size: 24px; position: absolute; top: 50%; left: 50%; -moz-transform: translateX(-50%) translateY(-50%); -webkit-transform: translateX(-50%) translateY(-50%); transform: translateX(-50%) translateY(-50%);"
-           *ngIf="(expenses$ | async).length === 0 && !(requestingExpenses$ | async) && !(requestingCategories$ | async)">
+      <div class="no-data" *ngIf="(expenses$ | async).length === 0 && !(requestingExpenses$ | async) && !(requestingCategories$ | async)">
         No data
       </div>
     </div>

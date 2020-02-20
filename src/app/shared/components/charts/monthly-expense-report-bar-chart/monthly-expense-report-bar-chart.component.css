@@ -1,0 +1,7 @@
+.monthly-expense-report-bar-chart-container {
+  display: block;
+  width: 1000px;
+  height: 400px;
+  justify-content: center;
+  margin: auto;
+}

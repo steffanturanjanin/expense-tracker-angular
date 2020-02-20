@@ -4,7 +4,7 @@ import {AppState} from '../../../app.state';
 import {Observable} from 'rxjs';
 import {Expense} from '../../../shared/models/expense/expense';
 import {Category} from '../../../shared/models/category/category';
-import {GetAllExpensesRequestAction, GetExpensesRequestAction, RemoveExpenses} from '../../../expenses/store/actions/expenses.actions';
+import {GetAllExpensesRequestAction, GetExpensesByMonthRequestAction, RemoveExpenses} from '../../../expenses/store/actions/expenses.actions';
 import {GetCategoriesRequestAction} from '../../../categories/store/actions/categories.actions';
 
 import * as fromExpensesStore from '../../../expenses/store/reducers/index';
@@ -12,6 +12,7 @@ import * as fromCategoriesStore from '../../../categories/store/reducers/index';
 import * as fromDashboardStore from '../../store/reducers/index';
 import {GetAllReportsRequestAction, GetMonthlyReportRequestAction} from '../../store/actions/reports.actions';
 import {GetMonthListRequestAction} from '../../store/actions/months.actions';
+import {Month} from './components/timeline-sidebar/timeline-sidebar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,14 +51,15 @@ export class DashboardComponent implements OnInit {
     this.requestingReport$ = this.store.select(fromDashboardStore.selectReportRequesting);
   }
 
-  onMonthReportClick(year: number, month: number, name: string) {
-    this.store.dispatch(new GetMonthlyReportRequestAction({ year, month }));
+  onMonthlyReportSelected(month: Month) {
+    console.log(month);
+    this.store.dispatch(new GetMonthlyReportRequestAction({ year: month.year, month: month.number }));
     this.store.dispatch(new RemoveExpenses());
-    this.store.dispatch(new GetExpensesRequestAction({ year, month }));
-    this.reportPeriod = 'Monthly Report - ' + name + ' ' + year;
+    this.store.dispatch(new GetExpensesByMonthRequestAction({ year: month.year, month: month.number }));
+    this.reportPeriod = 'Monthly Report - ' + month.name + ' ' + month.year;
   }
 
-  onOverallReportClick() {
+  onOverallReportSelected() {
     this.store.dispatch(new GetAllReportsRequestAction());
     this.store.dispatch(new RemoveExpenses());
     this.store.dispatch(new GetAllExpensesRequestAction());

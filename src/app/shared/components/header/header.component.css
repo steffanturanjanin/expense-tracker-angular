@@ -5,6 +5,7 @@
   justify-content: center;
 }
 
+
 mat-sidenav-container {
   height: 93%;
 }
@@ -22,7 +23,7 @@ mat-toolbar {
 
 .logout-button-container {
   position: absolute;
-  right: 5%;
+  right: 2.5%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,3 +45,11 @@ mat-toolbar {
   margin-left: 10px;
 }
 
+mat-nav-list a i {
+  font-weight: 500;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 24px;
+  color: #bcb7b7;
+  display: block;
+}

@@ -5,7 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import {AddExpenseFormComponent} from './components/add-expense-form/add-expense-form.component';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../app.state';
-import {DeleteExpensesRequestAction, GetExpensesRequestAction, RemoveExpenses} from '../../store/actions/expenses.actions';
+import {DeleteExpensesRequestAction, GetExpensesByMonthRequestAction, RemoveExpenses} from '../../store/actions/expenses.actions';
 import * as fromStore from '../../store/reducers/index';
 import * as fromCategoriesStore from '../../../categories/store/reducers/index';
 import { Expense } from '../../../shared/models/expense/expense';
@@ -42,7 +42,7 @@ export class ExpensesComponent implements OnInit {
     this.requesting$ = this.store.select(fromStore.selectExpensesRequesting);
 
     this.store.dispatch(new RemoveExpenses());
-    this.store.dispatch(new GetExpensesRequestAction({year: this.year, month: this.month}));
+    this.store.dispatch(new GetExpensesByMonthRequestAction({year: this.year, month: this.month}));
     this.store.dispatch(new GetCategoriesRequestAction());
 
     this.categories$ = this.store.select(fromCategoriesStore.selectCategoriesAll);
@@ -53,8 +53,6 @@ export class ExpensesComponent implements OnInit {
       this.income = this.calculateIncome(this.expenses);
       this.expense =  this.calculateExpense(this.expenses);
     });
-
-    console.log(this.route.snapshot.params);
   }
 
   onDialogOpen() {
@@ -62,7 +60,6 @@ export class ExpensesComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
-    dialogConfig.data = {animal: 'panda'};
     this.dialog.open(AddExpenseFormComponent, dialogConfig);
   }
 

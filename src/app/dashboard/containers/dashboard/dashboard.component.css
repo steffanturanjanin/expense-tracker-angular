@@ -1,3 +1,20 @@
+.dashboard-container {
+  margin: 20px;
+  width: 85%;
+}
+
+.dashboard-container mat-divider {
+  margin-bottom: 10px;
+}
+
+.dashboard-container mat-card {
+  width: 100%;
+}
+
+.dashboard-container mat-card-title {
+  text-align: center;
+}
+
 mat-spinner {
   position: absolute;
   top: 50%;

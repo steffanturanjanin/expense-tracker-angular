@@ -22,7 +22,6 @@ export class CreateCategoryComponent implements OnInit {
 
     this.store.select(fromStore.selectCategoriesError)
       .subscribe((error) => {
-        console.log(error);
         this.error = error;
       });
   }
@@ -41,7 +40,6 @@ export class CreateCategoryComponent implements OnInit {
       name: event,
       icon: this.selectedIcon
     };
-    console.log(payload);
     this.store.dispatch(new CreateCategoryRequestAction(payload));
   }
 }

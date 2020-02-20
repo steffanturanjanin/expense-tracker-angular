@@ -9,9 +9,9 @@ export enum ExpensesActionTypes {
   GET_ALL_EXPENSES_SUCCESS = '[Expenses] Get All Expenses Success',
   GET_ALL_EXPENSES_FAILURE = '[Expenses] Get All Expenses Failure',
 
-  GET_EXPENSES_REQUEST = '[Expenses] Get Expenses Request',
-  GET_EXPENSES_SUCCESS = '[Expenses] Get Expenses Success',
-  GET_EXPENSES_FAILURE = '[Expenses] Get Expenses Failure',
+  GET_EXPENSES_BY_MONTH_REQUEST = '[Expenses] Get Expenses By Month Request',
+  GET_EXPENSES_BY_MONTH_SUCCESS = '[Expenses] Get Expenses By Month Success',
+  GET_EXPENSES_BY_MONTH_FAILURE = '[Expenses] Get Expenses By Month Failure',
 
   DELETE_EXPENSE_REQUEST = '[Expenses] Delete Expense Request',
   DELETE_EXPENSE_SUCCESS = '[Expenses] Delete Expense Success',
@@ -50,18 +50,18 @@ export class GetAllExpensesFailureAction implements Action {
   constructor(public payload: any) {}
 }
 
-export class GetExpensesRequestAction implements Action {
-  readonly type = ExpensesActionTypes.GET_EXPENSES_REQUEST;
+export class GetExpensesByMonthRequestAction implements Action {
+  readonly type = ExpensesActionTypes.GET_EXPENSES_BY_MONTH_REQUEST;
   constructor(public payload: any) {}
 }
 
-export class GetExpensesSuccessAction implements Action {
-  readonly type = ExpensesActionTypes.GET_EXPENSES_SUCCESS;
+export class GetExpensesByMonthSuccessAction implements Action {
+  readonly type = ExpensesActionTypes.GET_EXPENSES_BY_MONTH_SUCCESS;
   constructor(public payload: any) {}
 }
 
-export class GetExpensesFailureAction implements Action {
-  readonly type = ExpensesActionTypes.GET_EXPENSES_FAILURE;
+export class GetExpensesByMonthFailureAction implements Action {
+  readonly type = ExpensesActionTypes.GET_EXPENSES_BY_MONTH_FAILURE;
   constructor(public payload: any) {}
 }
 
@@ -88,9 +88,9 @@ export type ExpensesActions =
   | CreateExpenseRequestAction
   | CreateExpenseSuccessAction
   | CreateExpenseFailureAction
-  | GetExpensesRequestAction
-  | GetExpensesSuccessAction
-  | GetExpensesFailureAction
+  | GetExpensesByMonthRequestAction
+  | GetExpensesByMonthSuccessAction
+  | GetExpensesByMonthFailureAction
   | GetAllExpensesRequestAction
   | GetAllExpensesSuccessAction
   | GetAllExpensesFailureAction

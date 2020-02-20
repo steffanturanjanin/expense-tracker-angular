@@ -34,18 +34,18 @@ export function reducer(state: State = initialState, action: ExpensesActions) {
         error: action.payload.error
       };
     }
-    case ExpensesActionTypes.GET_EXPENSES_REQUEST: {
+    case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_REQUEST: {
       return {
         ...state,
         requesting: true,
         error: null
       };
     }
-    case ExpensesActionTypes.GET_EXPENSES_SUCCESS: {
+    case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_SUCCESS: {
       return adapter.addMany(action.payload.expenses,
         { ...state, requesting: false, error: null });
     }
-    case ExpensesActionTypes.GET_EXPENSES_FAILURE: {
+    case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_FAILURE: {
       return {
         ...state,
         requesting: false,

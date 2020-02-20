@@ -8,11 +8,13 @@ import {StoreModule} from '@ngrx/store';
 import {reducers} from './store/reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {effects} from './store/effects';
+import { TimelineSidebarComponent } from './containers/dashboard/components/timeline-sidebar/timeline-sidebar.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
+    TimelineSidebarComponent,
   ],
   imports: [
     CommonModule,
