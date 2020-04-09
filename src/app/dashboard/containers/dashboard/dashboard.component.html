@@ -7,7 +7,7 @@
 
 <div class="dashboard-container">
   <h1>Dashboard</h1>
-  <p>{{reportPeriod}}</p>
+  <p>{{ reportPeriod }}</p>
   <mat-divider></mat-divider>
   <mat-grid-list cols="12" rowHeight="150px">
     <mat-grid-tile colspan="6" rowspan="3">
@@ -18,12 +18,12 @@
         <mat-spinner [diameter]="60" *ngIf="(requestingCategories$ | async) || (requestingExpenses$ | async)">
 
         </mat-spinner>
-        <app-pie-chart
+        <app-total-expenses-by-category-pie-chart
           [expenses$]="expenses$"
           [categories$]="categories$"
           [requestingExpenses$]="requestingExpenses$"
           [requestingCategories$]="requestingCategories$">
-        </app-pie-chart>
+        </app-total-expenses-by-category-pie-chart>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="3">
@@ -34,12 +34,12 @@
         <mat-spinner [diameter]="60" *ngIf="(requestingCategories$ | async) || (requestingExpenses$ | async)">
 
         </mat-spinner>
-        <app-bar-chart
+        <app-categories-by-consumption-bar-chart
           [expenses$]="expenses$"
           [categories$]="categories$"
           [requestingExpenses$]="requestingExpenses$"
           [requestingCategories$]="requestingCategories$">
-        </app-bar-chart>
+        </app-categories-by-consumption-bar-chart>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile colspan="12" rowspan="3">

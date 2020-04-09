@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export interface Month {
   year: number;
@@ -11,15 +11,12 @@ export interface Month {
   templateUrl: './timeline-sidebar.component.html',
   styleUrls: ['./timeline-sidebar.component.css']
 })
-export class TimelineSidebarComponent implements OnInit {
+export class TimelineSidebarComponent {
   @Input() months$;
   @Output() monthlyReportSelected: EventEmitter<Month> = new EventEmitter();
   @Output() overallReportSelected: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   onMonthlyReportSelected(month: Month) {
     this.monthlyReportSelected.emit(month);

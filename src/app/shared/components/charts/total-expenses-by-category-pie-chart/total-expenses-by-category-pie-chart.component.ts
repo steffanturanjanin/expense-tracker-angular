@@ -1,23 +1,20 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ChartOptions} from 'chart.js';
-import {Expense} from '../../../models/expense/expense';
-import {Category} from '../../../models/category/category';
-import {Observable} from 'rxjs';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChartOptions } from 'chart.js';
+import { Expense } from '../../../models/expense/expense';
+import { Category } from '../../../models/category/category';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-pie-chart',
-  templateUrl: './pie-chart.component.html',
-  styleUrls: ['./pie-chart.component.css']
+  selector: 'app-total-expenses-by-category-pie-chart',
+  templateUrl: './total-expenses-by-category-pie-chart.component.html',
+  styleUrls: ['./total-expenses-by-category-pie-chart.component.css']
 })
-export class PieChartComponent implements OnInit, OnChanges {
+export class TotalExpensesByCategoryPieChartComponent implements OnInit, OnChanges {
 
   @Input() expenses$: Observable<Expense[]>;
   @Input() categories$: Observable<Category[]>;
   @Input() requestingExpenses$: Observable<boolean>;
   @Input() requestingCategories$: Observable<boolean>;
-
-  // expenses: Expense[] = [];
-  // categories: Category[] = [];
 
   constructor() { }
 

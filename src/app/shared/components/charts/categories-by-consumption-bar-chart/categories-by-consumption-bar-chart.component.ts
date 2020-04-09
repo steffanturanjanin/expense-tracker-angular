@@ -1,16 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
-import {Label} from 'ng2-charts';
-import {Observable} from 'rxjs';
-import {Expense} from '../../../models/expense/expense';
-import {Category} from '../../../models/category/category';
+import { Component, Input, OnInit } from '@angular/core';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
+import { Observable } from 'rxjs';
+import { Expense } from '../../../models/expense/expense';
+import { Category } from '../../../models/category/category';
 
 @Component({
-  selector: 'app-bar-chart',
-  templateUrl: './bar-chart.component.html',
-  styleUrls: ['./bar-chart.component.css']
+  selector: 'app-categories-by-consumption-bar-chart',
+  templateUrl: './categories-by-consumption-bar-chart.component.html',
+  styleUrls: ['./categories-by-consumption-bar-chart.component.css']
 })
-export class BarChartComponent implements OnInit {
+export class CategoriesByConsumptionBarChartComponent implements OnInit {
 
   @Input() expenses$: Observable<Expense[]>;
   @Input() categories$: Observable<Category[]>;
@@ -20,6 +20,7 @@ export class BarChartComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
     scales: { xAxes: [{}], yAxes: [{}]},
+    maintainAspectRatio: false,
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -30,7 +31,6 @@ export class BarChartComponent implements OnInit {
       position: 'right'
     }
   };
-
 
   public barChartLabels: Label[] = ['Categories'];
   public barChartType: ChartType = 'bar';

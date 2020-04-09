@@ -7,9 +7,13 @@ import { AuthenticationLayoutComponent } from './layouts/authentication-layout/a
 import { AuthenticatedLayoutComponent } from './layouts/authenticated-layout/authenticated-layout.component';
 
 import { HeaderComponent } from './components/header/header.component';
-import {PieChartComponent} from './components/charts/pie-chart/pie-chart.component';
-import {ChartsModule} from 'ng2-charts';
-import { BarChartComponent } from './components/charts/bar-chart/bar-chart.component';
+import {
+  TotalExpensesByCategoryPieChartComponent
+} from './components/charts/total-expenses-by-category-pie-chart/total-expenses-by-category-pie-chart.component';
+import { ChartsModule } from 'ng2-charts';
+import {
+  CategoriesByConsumptionBarChartComponent
+} from './components/charts/categories-by-consumption-bar-chart/categories-by-consumption-bar-chart.component';
 import {
   OverallExpenseReportBarChartComponent
 } from './components/charts/overall-expense-report-bar-chart/overall-expense-report-bar-chart.component';
@@ -24,8 +28,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     HeaderComponent,
     AuthenticationLayoutComponent,
     AuthenticatedLayoutComponent,
-    PieChartComponent,
-    BarChartComponent,
+    TotalExpensesByCategoryPieChartComponent,
+    CategoriesByConsumptionBarChartComponent,
     OverallExpenseReportBarChartComponent,
     MonthlyExpenseReportBarChartComponent,
     NotFoundComponent
@@ -40,8 +44,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     HeaderComponent,
     AuthenticatedLayoutComponent,
     AuthenticationLayoutComponent,
-    PieChartComponent,
-    BarChartComponent,
+    TotalExpensesByCategoryPieChartComponent,
+    CategoriesByConsumptionBarChartComponent,
     OverallExpenseReportBarChartComponent,
     MonthlyExpenseReportBarChartComponent,
     NotFoundComponent

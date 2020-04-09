@@ -1,8 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
-import {Label} from 'ng2-charts';
-import {Observable} from 'rxjs';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-monthly-expense-report-bar-chart',
@@ -19,6 +18,7 @@ export class MonthlyExpenseReportBarChartComponent implements OnInit {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: { xAxes: [{}], yAxes: [{}] },
+    maintainAspectRatio: false,
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -35,7 +35,6 @@ export class MonthlyExpenseReportBarChartComponent implements OnInit {
 
   public barChartData: ChartDataSets[] = [];
 
-
   ngOnInit() {
     this.report$.subscribe((report) => {
       if (report !== null) {
@@ -44,18 +43,12 @@ export class MonthlyExpenseReportBarChartComponent implements OnInit {
         Object.keys(report).forEach((monthlyReport) => {
           report[monthlyReport].days.forEach((day, index) => {
             this.barChartData.push({ data: [0], label: (index + 1).toString()});
-            /*const value = day.expenses.filter((expense) => expense.type === 'expense')
-              .reduce((accumulator, currentValue) => {
-                return accumulator + currentValue.amount;
-              }, 0);
-            this.barChartData.push({ data: [value], label: (index + 1).toString()});*/
             });
           report[monthlyReport].days.forEach((day, index) => {
             const value = day.expenses.filter((expense) => expense.type === 'expense')
               .reduce((accumulator, currentValue) => {
                 return accumulator + currentValue.amount;
               }, 0);
-            // this.barChartData.push({ data: [value], label: (index + 1).toString()});
             this.barChartData[index].data[0] = value;
           });
           });

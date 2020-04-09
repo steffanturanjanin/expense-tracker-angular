@@ -1,7 +1,7 @@
 <div>
   <div>
     <div class="bar-chart-container">
-      <canvas *ngIf="(expenses$ | async).length > 0 && barChartData.length !== 0" baseChart width="400px" height="400px"
+      <canvas width="400px" height="400px" *ngIf="(expenses$ | async).length > 0 && barChartData.length !== 0" baseChart
               [datasets]="barChartData"
               [labels]="barChartLabels"
               [options]="barChartOptions"
