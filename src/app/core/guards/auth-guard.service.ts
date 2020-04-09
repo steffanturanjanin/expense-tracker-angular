@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Store } from '@ngrx/store';
+
 import { AuthService } from '../services/auth/auth.service';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import {Observable} from 'rxjs';
-import {Store} from '@ngrx/store';
 import * as fromStore from '../../authentication/store/reducers';
-import {GetAuthenticatedUserRequestAction, LoginSuccessAction} from '../../authentication/store/actions/auth.actions';
+import { GetAuthenticatedUserRequestAction } from '../../authentication/store/actions/auth.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class AuthGuardService implements CanActivate {
       this.router.navigateByUrl('/');
       return false;
     } else {
-      this.store.dispatch(new GetAuthenticatedUserRequestAction({token}));
+      this.store.dispatch(new GetAuthenticatedUserRequestAction({ token }));
       return true;
     }
   }

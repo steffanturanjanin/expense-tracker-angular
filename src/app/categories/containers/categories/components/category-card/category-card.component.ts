@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Category } from '../../../../../shared/models/category/category';
 import { Observable } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   templateUrl: './category-card.component.html',
   styleUrls: ['./category-card.component.css']
 })
-export class CategoryCardComponent implements OnInit {
+export class CategoryCardComponent {
 
   @Input() category: Category;
   @Input() deletingCategoryId: number;
@@ -15,12 +15,7 @@ export class CategoryCardComponent implements OnInit {
 
   @Output() deletedCategory = new EventEmitter<number>();
 
-  constructor() {
-
-  }
-
-  ngOnInit() {
-  }
+  constructor() {}
 
   deleteCategory(id: number) {
     this.deletedCategory.emit(id);

@@ -1,7 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Actions, Effect, ofType} from '@ngrx/effects';
-import {ReportsService} from '../../../core/services/reports/reports.service';
-import {Observable, of} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+
+import { ReportsService } from '../../../core/services/reports/reports.service';
+
+import { Observable, of } from 'rxjs';
+import {catchError, map, switchMap} from 'rxjs/operators';
+
 import {
   GetAllReportsFailureAction,
   GetAllReportsSuccessAction, GetMonthlyReportFailureAction,
@@ -9,7 +13,6 @@ import {
   ReportsActions,
   ReportsActionTypes
 } from '../actions/reports.actions';
-import {catchError, map, switchMap} from 'rxjs/operators';
 
 @Injectable()
 export class ReportsEffects {

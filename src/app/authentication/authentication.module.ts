@@ -3,6 +3,7 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -13,12 +14,10 @@ import { CustomMaterialModule } from '../core/material.module';
 import { reducers } from './store/reducers';
 import { effects } from './store/effects';
 
-import { AuthenticationLayoutComponent } from '../shared/layouts/authentication-layout/authentication-layout.component';
-import {SharedModule} from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    // AuthenticationLayoutComponent,
     SignUpComponent,
     LogInComponent,
   ],

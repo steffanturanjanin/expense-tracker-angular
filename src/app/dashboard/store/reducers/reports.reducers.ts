@@ -1,4 +1,4 @@
-import {ReportsActions, ReportsActionTypes} from '../actions/reports.actions';
+import { ReportsActions, ReportsActionTypes } from '../actions/reports.actions';
 
 export interface State {
   report: any;

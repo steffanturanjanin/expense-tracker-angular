@@ -1,17 +1,24 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import {AddExpenseFormComponent} from './components/add-expense-form/add-expense-form.component';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../../app.state';
-import {DeleteExpensesRequestAction, GetExpensesByMonthRequestAction, RemoveExpenses} from '../../store/actions/expenses.actions';
+
+import { Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
+
+import { AddExpenseFormComponent } from './components/add-expense-form/add-expense-form.component';
+
+import { AppState } from '../../../app.state';
 import * as fromStore from '../../store/reducers/index';
 import * as fromCategoriesStore from '../../../categories/store/reducers/index';
+
+import { DeleteExpensesRequestAction, GetExpensesByMonthRequestAction, RemoveExpenses } from '../../store/actions/expenses.actions';
+import { GetCategoriesRequestAction } from '../../../categories/store/actions/categories.actions';
+
 import { Expense } from '../../../shared/models/expense/expense';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Category} from '../../../shared/models/category/category';
-import {GetCategoriesRequestAction} from '../../../categories/store/actions/categories.actions';
+import { Category } from '../../../shared/models/category/category';
+
 
 @Component({
   selector: 'app-expenses',

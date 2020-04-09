@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../../app.state';
-import {Observable} from 'rxjs';
-import {Expense} from '../../../shared/models/expense/expense';
-import {Category} from '../../../shared/models/category/category';
-import {GetAllExpensesRequestAction, GetExpensesByMonthRequestAction, RemoveExpenses} from '../../../expenses/store/actions/expenses.actions';
-import {GetCategoriesRequestAction} from '../../../categories/store/actions/categories.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../app.state';
+import { Observable } from 'rxjs';
+import { Expense } from '../../../shared/models/expense/expense';
+import { Category } from '../../../shared/models/category/category';
 
 import * as fromExpensesStore from '../../../expenses/store/reducers/index';
 import * as fromCategoriesStore from '../../../categories/store/reducers/index';
 import * as fromDashboardStore from '../../store/reducers/index';
-import {GetAllReportsRequestAction, GetMonthlyReportRequestAction} from '../../store/actions/reports.actions';
-import {GetMonthListRequestAction} from '../../store/actions/months.actions';
-import {Month} from './components/timeline-sidebar/timeline-sidebar.component';
+
+import {
+  GetAllExpensesRequestAction, GetExpensesByMonthRequestAction, RemoveExpenses
+} from '../../../expenses/store/actions/expenses.actions';
+import { GetCategoriesRequestAction } from '../../../categories/store/actions/categories.actions';
+import { GetAllReportsRequestAction, GetMonthlyReportRequestAction } from '../../store/actions/reports.actions';
+import { GetMonthListRequestAction } from '../../store/actions/months.actions';
+import { Month } from './components/timeline-sidebar/timeline-sidebar.component';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {MatSort, MatTableDataSource} from '@angular/material';
-import {Expense} from '../../../../../shared/models/expense/expense';
-import {Observable} from 'rxjs';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { MatSort, MatTableDataSource } from '@angular/material';
+import { Expense } from '../../../../../shared/models/expense/expense';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-expenses-table',

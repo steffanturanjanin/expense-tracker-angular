@@ -1,5 +1,5 @@
-import {User} from '../../../shared/models/user/user';
-import {AuthActions, AuthActionTypes} from '../actions/auth.actions';
+import { User } from '../../../shared/models/user/user';
+import { AuthActions, AuthActionTypes } from '../actions/auth.actions';
 
 export interface State {
   isAuthenticated: boolean;

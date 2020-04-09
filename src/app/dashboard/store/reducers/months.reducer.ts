@@ -1,4 +1,4 @@
-import {MonthsActions, MonthsActionTypes} from '../actions/months.actions';
+import { MonthsActions, MonthsActionTypes } from '../actions/months.actions';
 
 export interface State {
   monthList: [];

@@ -1,4 +1,4 @@
-import {Injectable, NgZone} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { CategoriesService } from '../../../core/services/categories/categories.service';
 import { Router } from '@angular/router';
@@ -14,7 +14,6 @@ import {
   GetCategoriesSuccessAction
 } from '../actions/categories.actions';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import {Category} from '../../../shared/models/category/category';
 
 @Injectable()
 export class CategoriesEffects {
@@ -22,7 +21,6 @@ export class CategoriesEffects {
     private actions: Actions,
     private categoriesService: CategoriesService,
     private router: Router,
-    private ngZone: NgZone
   ) {}
 
   @Effect()
@@ -33,7 +31,6 @@ export class CategoriesEffects {
       return this.categoriesService.createCategory(payload.name, payload.icon).pipe(
         map((response) => {
            this.router.navigateByUrl('categories');
-          // this.ngZone.run(() => this.router.navigateByUrl('/categories'));
            return new CreateCategorySuccessAction({ category: response });
         }),
         catchError((error) => {

@@ -1,6 +1,6 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as report from './reports.reducers';
 import * as months from './months.reducer';
-import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 export interface DashboardState {
   report: report.State;

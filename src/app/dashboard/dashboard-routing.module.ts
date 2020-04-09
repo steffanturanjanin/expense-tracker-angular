@@ -9,11 +9,8 @@ const dashboardRoutes: Routes = [
   {
     path: 'dashboard', component: AuthenticatedLayoutComponent, canActivate: [AuthGuardService],
     children: [
-      {
-        path: '', component: DashboardComponent,
-      },
-      // { path: '**', component: NotFoundComponent }
-      { path: '**', redirectTo: '404'}
+      { path: '', component: DashboardComponent },
+      { path: '**', component: NotFoundComponent }
     ],
   },
 

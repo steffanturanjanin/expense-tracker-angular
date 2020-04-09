@@ -9,8 +9,7 @@ const expensesRoutes: Routes = [
   { path: 'expenses', component: AuthenticatedLayoutComponent, canActivate: [AuthGuardService],
     children: [
       { path: '', component: ExpensesComponent },
-      // { path: '**', component: NotFoundComponent }
-      { path: '**', redirectTo: '404'}
+      { path: '**', component: NotFoundComponent }
     ]
   },
 ];

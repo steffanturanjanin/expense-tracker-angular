@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../../../shared/models/category/category';
 import { Store } from '@ngrx/store';
+
+import { Category } from '../../../shared/models/category/category';
 import * as fromStore from '../../store/reducers/index';
 import { CategoriesState } from '../../store/reducers';
 import { DeleteCategoryRequestAction, GetCategoriesRequestAction } from '../../store/actions/categories.actions';

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as fromStore from '../../store/reducers/index';
 import { CategoriesState } from '../../store/reducers';
-import {CreateCategoryRequestAction} from '../../store/actions/categories.actions';
+import { CreateCategoryRequestAction } from '../../store/actions/categories.actions';
 
 @Component({
   selector: 'app-create-category',
