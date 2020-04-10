@@ -3,7 +3,7 @@
     <input matInput placeholder="Search" (change)="onChange($event.target.value)">
   </mat-form-field>
 </div>
-<mat-grid-list cols="18">
+<mat-grid-list cols="16">
   <mat-grid-tile *ngFor="let icon of filteredIcons">
     <mat-card [ngClass]="{'selected-icon' : icon === selected }" (click)="onIconSelected(icon)">
       <i class="fa {{icon}}"></i>

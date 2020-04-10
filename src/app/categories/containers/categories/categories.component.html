@@ -1,4 +1,4 @@
-<mat-grid-list cols="5" rowHeight="1.8:2">
+<mat-grid-list cols="5" rowHeight="250px" gutterSize="10">
   <mat-grid-tile *ngFor="let category of categories$ | async">
     <app-category-card
       [category] = "category"

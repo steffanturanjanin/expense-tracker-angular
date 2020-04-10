@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { Observable } from 'rxjs';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-monthly-expense-report-bar-chart',
@@ -27,6 +28,13 @@ export class MonthlyExpenseReportBarChartComponent implements OnInit {
     },
     legend: {
       display: false
+    },
+    tooltips: {
+      callbacks: {
+        label: (tooltipItem) => {
+          return new DecimalPipe('en').transform(tooltipItem.value, '1.2-2');
+        }
+      }
     }
   };
   public barChartLabels: Label[] = [];

@@ -1,0 +1,14 @@
+mat-card {
+  border: 1px solid #9b5fe2;
+  margin-bottom: 10px;
+}
+
+mat-card i {
+  margin-left: 5px;
+}
+
+.top-expense-container {
+  display: inline;
+  margin-left: 5px;
+}
+

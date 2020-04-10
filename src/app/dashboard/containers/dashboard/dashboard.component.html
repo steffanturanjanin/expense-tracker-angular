@@ -9,15 +9,13 @@
   <h1>Dashboard</h1>
   <p>{{ reportPeriod }}</p>
   <mat-divider></mat-divider>
-  <mat-grid-list cols="12" rowHeight="150px">
+  <mat-grid-list cols="12" rowHeight="150px" gutterSize="10">
     <mat-grid-tile colspan="6" rowspan="3">
       <mat-card>
         <mat-card-title>
           Total expenses by category
         </mat-card-title>
-        <mat-spinner [diameter]="60" *ngIf="(requestingCategories$ | async) || (requestingExpenses$ | async)">
-
-        </mat-spinner>
+        <mat-spinner [diameter]="60" *ngIf="(requestingCategories$ | async) || (requestingExpenses$ | async)"></mat-spinner>
         <app-total-expenses-by-category-pie-chart
           [expenses$]="expenses$"
           [categories$]="categories$"
@@ -31,9 +29,7 @@
         <mat-card-title>
           Categories by consumption
         </mat-card-title>
-        <mat-spinner [diameter]="60" *ngIf="(requestingCategories$ | async) || (requestingExpenses$ | async)">
-
-        </mat-spinner>
+        <mat-spinner [diameter]="60" *ngIf="(requestingCategories$ | async) || (requestingExpenses$ | async)"></mat-spinner>
         <app-categories-by-consumption-bar-chart
           [expenses$]="expenses$"
           [categories$]="categories$"
@@ -42,11 +38,30 @@
         </app-categories-by-consumption-bar-chart>
       </mat-card>
     </mat-grid-tile>
+    <mat-grid-tile colspan="4" rowspan="2">
+      <mat-card style="width: 100%; height: 100%; overflow: auto">
+        <mat-card-title>Top expenses</mat-card-title>
+        <app-top-expenses
+          [expenses$]="expenses$"
+          [numberOfTopExpenses]="5"
+          [requestingExpenses$]="requestingExpenses$"
+        >
+        </app-top-expenses>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="4" rowspan="2">
+      <mat-card style="width: 100%; height: 100%">
+        here goes top 5 highest expenses
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="4" rowspan="2">
+      <mat-card style="width: 100%; height: 100%">
+        here goes top 5 highest expenses
+      </mat-card>
+    </mat-grid-tile>
     <mat-grid-tile colspan="12" rowspan="3">
       <mat-card>
-        <mat-spinner [diameter]="60" *ngIf="(requestingReport$ | async)">
-
-        </mat-spinner>
+        <mat-spinner [diameter]="60" *ngIf="(requestingReport$ | async)"></mat-spinner>
         <app-overall-expense-report-bar-chart
           *ngIf="(reportType$ | async) === 'overall'"
           [report$]="report$"

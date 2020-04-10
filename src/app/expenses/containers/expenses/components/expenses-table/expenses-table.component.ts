@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 export class ExpensesTableComponent implements OnInit, OnChanges {
 
   deletingExpense = -1;
-  // showDelete = false;
   displayedColumns: string[] = ['id', 'category', 'name', 'amount', 'date', 'type', 'actions', 'loader'];
   dataSource: MatTableDataSource<Expense>;
 
@@ -21,8 +20,7 @@ export class ExpensesTableComponent implements OnInit, OnChanges {
 
   @Output() onExpenseDeleted = new EventEmitter<Expense>();
 
-
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor() { }
 
@@ -33,7 +31,6 @@ export class ExpensesTableComponent implements OnInit, OnChanges {
   }
 
   deleteExpense(row) {
-    console.log(row);
     this.deletingExpense = row.id;
     this.onExpenseDeleted.emit(row);
   }
@@ -42,9 +39,5 @@ export class ExpensesTableComponent implements OnInit, OnChanges {
     this.dataSource = new MatTableDataSource();
     this.dataSource.data = this.expenses;
     this.dataSource.sort = this.sort;
-  }
-
-  seeRowValue(row) {
-    console.log(row);
   }
 }

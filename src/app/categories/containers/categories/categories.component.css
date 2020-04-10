@@ -1,7 +1,6 @@
 mat-grid-list {
   text-align: center;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin: 20px;
 }
 
 mat-grid-tile {

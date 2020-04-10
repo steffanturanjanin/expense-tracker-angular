@@ -3,6 +3,7 @@ import { ChartOptions } from 'chart.js';
 import { Expense } from '../../../models/expense/expense';
 import { Category } from '../../../models/category/category';
 import { Observable } from 'rxjs';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-total-expenses-by-category-pie-chart',
@@ -23,7 +24,14 @@ export class TotalExpensesByCategoryPieChartComponent implements OnInit, OnChang
     maintainAspectRatio: false,
     legend: {
       position: 'left'
-    }
+    },
+    // tooltips: {
+    //   callbacks: {
+    //     label: (tooltipItem, data) => {
+    //       return new DecimalPipe('en').transform(Number(data.datasets[tooltipItem.datasetIndex].label), '1.0-2');
+    //     }
+    //   }
+    // }
   };
 
   public pieChartLabels = [];
@@ -48,8 +56,8 @@ export class TotalExpensesByCategoryPieChartComponent implements OnInit, OnChang
       }
       this.expenses$.subscribe((expenses) => {
         this.pieChartLabels.forEach((category, index) => {
-          this.pieChartData[index] = expenses.filter(expense => expense.category !== null && expense.category.name === category)
-            .reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0);
+           this.pieChartData[index] = expenses.filter(expense => expense.category !== null && expense.category.name === category)
+             .reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0);
         });
         this.pieChartData = this.pieChartData.slice();
       });

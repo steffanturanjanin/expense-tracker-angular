@@ -1,0 +1,12 @@
+<mat-spinner [diameter]="60" *ngIf="(requestingExpenses$ | async)"></mat-spinner>
+<mat-card *ngFor="let expense of topExpenses" matTooltip="{{ expense.category.name }} - {{ expense.date }}" matTooltipPosition="after">
+  <i class="fa {{ expense.category.icon }}"></i>
+  <div class="top-expense-container">
+    {{ expense.name }}
+    -
+    {{ expense.amount | number: '1.2-2' }}
+  </div>
+</mat-card>
+<div class="no-data" *ngIf="topExpenses.length === 0 && !(requestingExpenses$ | async)">
+  No data
+</div>

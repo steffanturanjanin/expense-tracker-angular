@@ -15,11 +15,22 @@
   text-align: center;
 }
 
-mat-spinner {
+.no-data {
+  color:#7c7b7b;
+  font-size: 24px;
   position: absolute;
   top: 50%;
   left: 50%;
   -moz-transform: translateX(-50%) translateY(-50%);
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
+}
+
+mat-spinner {
+  position: absolute;
+  top: 42%;
+  left: 40%;
+  -moz-transform: translateX(-40%) translateY(-42%);
+  -webkit-transform: translateX(-40%) translateY(-42%);
+  transform: translateX(-40%) translateY(-42%);
 }

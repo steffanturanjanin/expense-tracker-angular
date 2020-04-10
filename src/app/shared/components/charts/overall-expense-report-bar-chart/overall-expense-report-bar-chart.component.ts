@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-overall-expense-report-bar-chart',
@@ -11,6 +12,7 @@ import { Label } from 'ng2-charts';
 export class OverallExpenseReportBarChartComponent implements OnInit {
   @Input() report$: Observable<any>;
   @Input() requestingReport$: Observable<boolean>;
+
   constructor() {}
 
   public barChartOptions: ChartOptions = {
@@ -22,6 +24,13 @@ export class OverallExpenseReportBarChartComponent implements OnInit {
       datalabels: {
         anchor: 'end',
         align: 'end',
+      },
+    },
+    tooltips: {
+      callbacks: {
+        label: (tooltipItem) => {
+          return new DecimalPipe('en').transform(tooltipItem.value, '1.2-2');
+        }
       }
     }
   };

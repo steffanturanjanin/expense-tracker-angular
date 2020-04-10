@@ -10,6 +10,7 @@ import { CustomMaterialModule } from '../core/material.module';
 
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { TimelineSidebarComponent } from './containers/dashboard/components/timeline-sidebar/timeline-sidebar.component';
+import { TopExpensesComponent } from './containers/dashboard/components/top-expenses/top-expenses.component';
 
 import { reducers } from './store/reducers';
 import { effects } from './store/effects';
@@ -20,6 +21,7 @@ import { effects } from './store/effects';
   declarations: [
     DashboardComponent,
     TimelineSidebarComponent,
+    TopExpensesComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,6 @@ import { effects } from './store/effects';
     SharedModule,
     StoreModule.forFeature('dashboardFeature', reducers),
     EffectsModule.forFeature(effects)
-  ]
+  ],
 })
 export class DashboardModule { }
