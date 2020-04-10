@@ -1,8 +1,7 @@
 <app-timeline-sidebar
   [months$]="months$"
   (monthlyReportSelected)="onMonthlyReportSelected($event)"
-  (overallReportSelected)="onOverallReportSelected($event)"
->
+  (overallReportSelected)="onOverallReportSelected($event)">
 </app-timeline-sidebar>
 
 <div class="dashboard-container">
@@ -38,25 +37,24 @@
         </app-categories-by-consumption-bar-chart>
       </mat-card>
     </mat-grid-tile>
-    <mat-grid-tile colspan="4" rowspan="2">
-      <mat-card style="width: 100%; height: 100%; overflow: auto">
+    <mat-grid-tile colspan="8" rowspan="2">
+      <mat-card class="top-expenses-container">
         <mat-card-title>Top expenses</mat-card-title>
         <app-top-expenses
           [expenses$]="expenses$"
           [numberOfTopExpenses]="5"
-          [requestingExpenses$]="requestingExpenses$"
-        >
+          [requestingExpenses$]="requestingExpenses$">
         </app-top-expenses>
       </mat-card>
     </mat-grid-tile>
-    <mat-grid-tile colspan="4" rowspan="2">
-      <mat-card style="width: 100%; height: 100%">
-        here goes top 5 highest expenses
+    <mat-grid-tile colspan="4" rowspan="1">
+      <mat-card class="stats">
+        <app-income [expenses$]="expenses$"></app-income>
       </mat-card>
     </mat-grid-tile>
-    <mat-grid-tile colspan="4" rowspan="2">
-      <mat-card style="width: 100%; height: 100%">
-        here goes top 5 highest expenses
+    <mat-grid-tile colspan="4" rowspan="1">
+      <mat-card class="stats">
+        <app-overall-expense [expenses$]="expenses$"></app-overall-expense>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile colspan="12" rowspan="3">

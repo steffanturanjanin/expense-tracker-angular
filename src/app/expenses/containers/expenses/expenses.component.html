@@ -1,5 +1,3 @@
-
-<!-- separate component -->
 <mat-toolbar>
   <mat-grid-list cols="12">
     <a mat-button color="primary"  (click)="onDialogOpen()">Add expense</a>
@@ -7,41 +5,33 @@
     <a mat-button color="primary">Update expense</a>
   </mat-grid-list>
 </mat-toolbar>
-
-<div style="margin-left: 5%; margin-right: 5%">
-
-  <h2> Monthly report for {{monthName}} {{year}} </h2>
-
+<div class="expense-report-container">
+  <h2> Monthly report for {{ monthName }} {{ year }} </h2>
   <mat-grid-list [cols]="3" rowHeight="100px" >
     <mat-grid-tile colspan="1" rowspan="1">
       <mat-card>
-        <p>Income {{income}}$</p>
+        <app-income [expenses$]="expenses$"></app-income>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1">
       <mat-card>
-        <p>Expenses {{expense}}$</p>
+        <app-overall-expense [expenses$]="expenses$"></app-overall-expense>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1">
       <mat-card>
         <div>
-          <p>Balance {{income - expense}}$</p>
-          <mat-progress-bar value="{{100*(income - expense)/income}}"></mat-progress-bar>
+          <p>Balance {{ income - expense | number: '1.2-2' }}</p>
+          <mat-progress-bar value="{{ 100*(income - expense)/income }}"></mat-progress-bar>
         </div>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
-
-
-
   <mat-divider> </mat-divider>
-
   <app-expenses-table
     [expenses]="expenses"
     [showDelete]="showDelete"
     [requesting$]="requesting$"
     (onExpenseDeleted)="deleteExpense($event)">
   </app-expenses-table>
-
 </div>

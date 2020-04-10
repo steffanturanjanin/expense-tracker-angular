@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { CustomMaterialModule } from '../core/material.module';
+import { ExpensesModule } from '../expenses/expenses.module';
 
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { TimelineSidebarComponent } from './containers/dashboard/components/timeline-sidebar/timeline-sidebar.component';
@@ -14,8 +15,6 @@ import { TopExpensesComponent } from './containers/dashboard/components/top-expe
 
 import { reducers } from './store/reducers';
 import { effects } from './store/effects';
-
-
 
 @NgModule({
   declarations: [
@@ -28,6 +27,7 @@ import { effects } from './store/effects';
     CustomMaterialModule,
     DashboardRoutingModule,
     SharedModule,
+    ExpensesModule,
     StoreModule.forFeature('dashboardFeature', reducers),
     EffectsModule.forFeature(effects)
   ],

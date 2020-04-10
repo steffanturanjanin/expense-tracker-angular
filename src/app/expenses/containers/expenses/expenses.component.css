@@ -36,3 +36,8 @@ mat-divider {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.expense-report-container {
+  margin-left: 5%;
+  margin-right: 5%;
+}

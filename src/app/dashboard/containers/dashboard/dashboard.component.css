@@ -34,3 +34,17 @@ mat-spinner {
   -webkit-transform: translateX(-40%) translateY(-42%);
   transform: translateX(-40%) translateY(-42%);
 }
+
+.stats {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-expenses-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
