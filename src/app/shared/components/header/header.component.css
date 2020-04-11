@@ -7,11 +7,11 @@
 
 
 mat-sidenav-container {
-  height: 93%;
+  height: calc(100vh - 60px);
 }
 
 mat-toolbar {
-  height: 7%;
+  height: 60px;
 }
 
 .fa-bars {

@@ -28,8 +28,8 @@ export class OverallExpenseReportBarChartComponent implements OnInit {
     },
     tooltips: {
       callbacks: {
-        label: (tooltipItem) => {
-          return new DecimalPipe('en').transform(tooltipItem.value, '1.2-2');
+        label: (tooltipItem, data) => {
+          return data.datasets[tooltipItem.datasetIndex].label + ': ' + new DecimalPipe('en').transform(tooltipItem.value, '1.2-2');
         }
       }
     }
