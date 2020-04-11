@@ -55,7 +55,6 @@ export class DashboardComponent implements OnInit {
   }
 
   onMonthlyReportSelected(month: Month) {
-    console.log(month);
     this.store.dispatch(new GetMonthlyReportRequestAction({ year: month.year, month: month.number }));
     this.store.dispatch(new RemoveExpenses());
     this.store.dispatch(new GetExpensesByMonthRequestAction({ year: month.year, month: month.number }));

@@ -1,0 +1,19 @@
+mat-form-field {
+  width: 90%;
+}
+
+mat-spinner {
+  margin-bottom: 50px;
+}
+
+mat-grid-tile button {
+  width: 220px;
+  background-color: #8B30B2;
+  position: relative;
+  bottom: 20px;
+  left: 0;
+}
+
+mat-option i {
+  margin-right: 10px;
+}

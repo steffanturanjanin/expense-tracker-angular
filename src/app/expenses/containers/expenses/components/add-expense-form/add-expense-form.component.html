@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
-  <mat-grid-list cols="4" rowHeight="100px">
-    <mat-grid-tile colspan="2" rowspan="1">
-      <mat-form-field style="width: 90%">
+  <mat-grid-list cols="3" rowHeight="100px">
+    <mat-grid-tile colspan="3" rowspan="1">
+      <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput placeholder="Name" name="name" formControlName="name" required>
         <mat-error *ngIf="form.get('name').errors?.minlength">
@@ -11,41 +11,12 @@
           This field is required.
         </mat-error>
         <mat-error *ngIf="form.get('name').errors?.validationError">
-          {{form.get('name').errors?.validationError}}
+          {{ form.get('name').errors?.validationError }}
         </mat-error>
       </mat-form-field>
     </mat-grid-tile>
-    <mat-grid-tile colspan="2" rowspan="1">
-      <mat-form-field style="width: 90%">
-        <mat-label>Category</mat-label>
-        <mat-select formControlName="category" required>
-          <mat-option *ngFor="let category of categories$ | async" value="{{category.id}}">
-            <i class="fa {{category.icon}}" style="margin-right: 10px;"></i>
-            {{category.name}}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('category').errors?.required">
-          This field is required.
-        </mat-error>
-        <mat-error *ngIf="form.get('category').errors?.validationError">
-          {{form.get('category').errors?.validationError}}
-        </mat-error>
-      </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="2" rowspan="1">
-      <mat-form-field style="width: 90%">
-        <mat-label>Amount</mat-label>
-        <input matInput type="number" name="amount" formControlName="amount" placeholder="0.00" (change)="formatValue($event)" required/>
-        <mat-error *ngIf="form.get('amount').errors?.required">
-          This field is required.
-        </mat-error>
-        <mat-error *ngIf="form.get('amount').errors?.validationError">
-          {{form.get('amount').errors?.validationError}}
-        </mat-error>
-      </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="2" rowspan="1">
-      <mat-form-field style="width: 90%">
+    <mat-grid-tile colspan="3" rowspan="1">
+      <mat-form-field>
         <mat-label>Type</mat-label>
         <mat-select formControlName="type" (selectionChange)="onSelectTypeChange($event)" required>
           <mat-option value="0"><i class="fa fa-arrow-up"></i>Expense</mat-option>
@@ -55,17 +26,44 @@
           This field is required.
         </mat-error>
         <mat-error *ngIf="form.get('type').errors?.validationError">
-          {{form.get('type').errors?.validationError}}
+          {{ form.get('type').errors?.validationError }}
         </mat-error>
       </mat-form-field>
     </mat-grid-tile>
-    <mat-grid-tile colspan="4" rowspan="1">
-      <button mat-button style="width: 220px; background-color: #8B30B2; position: relative; bottom: 20px; left: 0" type="submit" [disabled]="!form.valid || error !== null">Submit</button>
+    <mat-grid-tile colspan="3" rowspan="1">
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category" required>
+          <mat-option *ngFor="let category of categories$ | async" value="{{ category.id }}">
+            <i class="fa {{ category.icon }}"></i>
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('category').errors?.required">
+          This field is required.
+        </mat-error>
+        <mat-error *ngIf="form.get('category').errors?.validationError">
+          {{ form.get('category').errors?.validationError }}
+        </mat-error>
+      </mat-form-field>
     </mat-grid-tile>
-    <mat-grid-tile colspan="4" rowspan="1" *ngIf="requesting$ | async">
-      <mat-spinner [diameter]="50" style="margin-bottom: 50px">
-
-      </mat-spinner>
+    <mat-grid-tile colspan="3" rowspan="1">
+      <mat-form-field>
+        <mat-label>Amount</mat-label>
+        <input matInput type="text" name="amount" formControlName="amount" placeholder="0.00" (change)="formatValue($event)" required/>
+        <mat-error *ngIf="form.get('amount').errors?.required">
+          This field is required.
+        </mat-error>
+        <mat-error *ngIf="form.get('amount').errors?.validationError">
+          {{ form.get('amount').errors?.validationError }}
+        </mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="1">
+      <button mat-button type="submit" [disabled]="!form.valid || error !== null">Submit</button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="1" *ngIf="requesting$ | async">
+      <mat-spinner [diameter]="50"></mat-spinner>
     </mat-grid-tile>
   </mat-grid-list>
 </form>

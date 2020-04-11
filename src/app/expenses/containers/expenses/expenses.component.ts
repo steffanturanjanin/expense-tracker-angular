@@ -66,7 +66,7 @@ export class ExpensesComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '60%';
+    dialogConfig.width = '40%';
     this.dialog.open(AddExpenseFormComponent, dialogConfig);
   }
 

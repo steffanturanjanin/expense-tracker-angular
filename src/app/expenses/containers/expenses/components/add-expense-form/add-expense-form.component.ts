@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DecimalPipe } from '@angular/common';
 
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../../../store/reducers/index';
@@ -14,7 +15,6 @@ import { Observable } from 'rxjs';
 
 import { Category } from '../../../../../shared/models/category/category';
 import { Expense } from '../../../../../shared/models/expense/expense';
-
 
 @Component({
   selector: 'app-add-expense-form',
@@ -66,7 +66,6 @@ export class AddExpenseFormComponent implements OnInit {
       expense.category = form.value.category !== null ? Number(form.value.category) : null;
       expense.amount = form.value.amount;
       expense.type = form.value.type !== null ? Number(form.value.type) : null;
-      console.log(expense);
 
       this.store.dispatch(new CreateExpenseRequestAction(expense));
     }
@@ -94,10 +93,7 @@ export class AddExpenseFormComponent implements OnInit {
   }
 
   formatValue(e) {
-    if (e.target.value > 2147483647) {
-      e.target.value = 2147483647;
-    }
-    e.target.value = parseFloat(e.target.value).toFixed(2);
+    e.target.value = new DecimalPipe('en').transform(e.target.value, '1.2-2');
   }
 
 
