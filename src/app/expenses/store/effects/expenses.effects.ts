@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { ExpensesService } from '../../../core/services/expenses/expenses.service';
-import { Observable, of } from 'rxjs';
-import { catchError, map, pluck, switchMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Actions, Effect, ofType} from '@ngrx/effects';
+import {ExpensesService} from '../../../core/services/expenses/expenses.service';
+import {Observable, of} from 'rxjs';
+import {catchError, map, pluck, switchMap} from 'rxjs/operators';
 import {
   CreateExpenseFailureAction,
   CreateExpenseRequestAction,
@@ -11,7 +11,9 @@ import {
   DeleteExpensesRequestAction,
   DeleteExpensesSuccessAction,
   ExpensesActions,
-  ExpensesActionTypes, GetAllExpensesFailureAction, GetAllExpensesSuccessAction,
+  ExpensesActionTypes,
+  GetAllExpensesFailureAction,
+  GetAllExpensesSuccessAction, GetExpensesByCategoryFailureAction, GetExpensesByCategorySuccessAction,
   GetExpensesByMonthFailureAction,
   GetExpensesByMonthSuccessAction
 } from '../actions/expenses.actions';
@@ -38,7 +40,11 @@ export class ExpensesEffects {
 
   @Effect()
   getExpensesRequestAction$: Observable<any> = this.actions.pipe(
-    ofType<ExpensesActions>(ExpensesActionTypes.GET_EXPENSES_BY_MONTH_REQUEST, ExpensesActionTypes.GET_ALL_EXPENSES_REQUEST),
+    ofType<ExpensesActions>(
+      ExpensesActionTypes.GET_EXPENSES_BY_MONTH_REQUEST,
+      ExpensesActionTypes.GET_ALL_EXPENSES_REQUEST,
+      ExpensesActionTypes.GET_EXPENSES_BY_CATEGORY_REQUEST
+    ),
     switchMap((action: ExpensesActions) => {
       switch (action.type) {
         case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_REQUEST: {
@@ -58,6 +64,16 @@ export class ExpensesEffects {
             }),
             catchError((error) => {
               return of(new GetAllExpensesFailureAction({ error }));
+            })
+          );
+        }
+        case ExpensesActionTypes.GET_EXPENSES_BY_CATEGORY_REQUEST: {
+          return this.expensesService.getExpensesByCategory(action.payload.id).pipe(
+            map((response) => {
+              return new GetExpensesByCategorySuccessAction({ expenses: response });
+            }),
+            catchError((error) => {
+              return of(new GetExpensesByCategoryFailureAction({ error }));
             })
           );
         }

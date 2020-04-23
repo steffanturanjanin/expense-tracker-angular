@@ -19,6 +19,7 @@ export function reducer(state: State = initialState, action: ExpensesActions) {
     case ExpensesActionTypes.CREATE_EXPENSE_REQUEST:
     case ExpensesActionTypes.GET_ALL_EXPENSES_REQUEST:
     case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_REQUEST:
+    case ExpensesActionTypes.GET_EXPENSES_BY_CATEGORY_REQUEST:
     case ExpensesActionTypes.DELETE_EXPENSE_REQUEST: {
       return {
         ...state,
@@ -28,6 +29,7 @@ export function reducer(state: State = initialState, action: ExpensesActions) {
     }
 
     case ExpensesActionTypes.GET_ALL_EXPENSES_SUCCESS:
+    case ExpensesActionTypes.GET_EXPENSES_BY_CATEGORY_SUCCESS:
     case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_SUCCESS: {
       return adapter.addMany(action.payload.expenses,
         { ...state, requesting: false, error: null });
@@ -46,6 +48,7 @@ export function reducer(state: State = initialState, action: ExpensesActions) {
     case ExpensesActionTypes.CREATE_EXPENSE_FAILURE:
     case ExpensesActionTypes.GET_ALL_EXPENSES_FAILURE:
     case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_FAILURE:
+    case ExpensesActionTypes.GET_EXPENSES_BY_CATEGORY_FAILURE:
     case ExpensesActionTypes.DELETE_EXPENSE_FAILURE: {
       return {
         ...state,

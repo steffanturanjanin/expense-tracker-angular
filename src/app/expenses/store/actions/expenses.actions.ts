@@ -13,6 +13,10 @@ export enum ExpensesActionTypes {
   GET_EXPENSES_BY_MONTH_SUCCESS = '[Expenses] Get Expenses By Month Success',
   GET_EXPENSES_BY_MONTH_FAILURE = '[Expenses] Get Expenses By Month Failure',
 
+  GET_EXPENSES_BY_CATEGORY_REQUEST = '[Expenses] Get Expenses By Category Request',
+  GET_EXPENSES_BY_CATEGORY_SUCCESS = '[Expenses] Get Expenses By Category Success',
+  GET_EXPENSES_BY_CATEGORY_FAILURE = '[Expenses] Get Expenses By Category Failure',
+
   DELETE_EXPENSE_REQUEST = '[Expenses] Delete Expense Request',
   DELETE_EXPENSE_SUCCESS = '[Expenses] Delete Expense Success',
   DELETE_EXPENSE_FAILURE = '[Expenses] Delete Expense Failure',
@@ -84,6 +88,21 @@ export class RemoveExpenses implements Action {
   readonly type = ExpensesActionTypes.REMOVE_EXPENSES;
 }
 
+export class GetExpensesByCategoryRequestAction implements Action {
+  readonly type = ExpensesActionTypes.GET_EXPENSES_BY_CATEGORY_REQUEST;
+  constructor(public payload: any) {}
+}
+
+export class GetExpensesByCategorySuccessAction implements Action {
+  readonly type = ExpensesActionTypes.GET_EXPENSES_BY_CATEGORY_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class GetExpensesByCategoryFailureAction implements Action {
+  readonly type = ExpensesActionTypes.GET_EXPENSES_BY_CATEGORY_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export type ExpensesActions =
   | CreateExpenseRequestAction
   | CreateExpenseSuccessAction
@@ -91,6 +110,9 @@ export type ExpensesActions =
   | GetExpensesByMonthRequestAction
   | GetExpensesByMonthSuccessAction
   | GetExpensesByMonthFailureAction
+  | GetExpensesByCategoryRequestAction
+  | GetExpensesByCategorySuccessAction
+  | GetExpensesByCategoryFailureAction
   | GetAllExpensesRequestAction
   | GetAllExpensesSuccessAction
   | GetAllExpensesFailureAction

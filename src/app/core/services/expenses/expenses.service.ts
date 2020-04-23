@@ -18,6 +18,10 @@ export class ExpensesService {
     return this.http.get<Expense[]>(`http://localhost:8000/api/expenses/${year}/${month}`);
   }
 
+  getExpensesByCategory(categoryId: number): Observable<Expense[]> {
+    return this.http.get<Expense[]>(`http://localhost:8000/api/expenses/categories/${categoryId}`);
+  }
+
   getAllExpenses(): Observable<Expense[]> {
     return this.http.get<Expense[]>('http://localhost:8000/api/expenses');
   }

@@ -9,14 +9,17 @@ import { Observable } from 'rxjs';
 
 import { AddExpenseFormComponent } from './components/add-expense-form/add-expense-form.component';
 
-import { AppState } from '../../../app.state';
 import * as fromStore from '../../store/reducers/index';
 
-import { DeleteExpensesRequestAction, GetExpensesByMonthRequestAction, RemoveExpenses } from '../../store/actions/expenses.actions';
+import {
+  DeleteExpensesRequestAction,
+  GetExpensesByCategoryRequestAction,
+  GetExpensesByMonthRequestAction,
+  RemoveExpenses
+} from '../../store/actions/expenses.actions';
 
 import { Expense } from '../../../shared/models/expense/expense';
 import {GetCategoryRequestAction} from '../../store/actions/category.actions';
-
 
 @Component({
   selector: 'app-expenses',
@@ -28,6 +31,7 @@ export class ExpensesComponent implements OnInit {
   expenses$: Observable<Expense[]>;
   requesting$: Observable<boolean>;
   showToolbar: boolean;
+  showStats: boolean;
   showDelete = false;
   title: string;
   expenses: Expense[];
@@ -36,7 +40,11 @@ export class ExpensesComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private store: Store<AppState>, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {}
+  constructor(
+    private store: Store<fromStore.ExpensesState>,
+    private router: Router,
+    private route: ActivatedRoute,
+    private dialog: MatDialog) {}
 
   ngOnInit() {
     this.requesting$ = this.store.select(fromStore.selectExpensesRequesting);
@@ -56,15 +64,26 @@ export class ExpensesComponent implements OnInit {
 
           this.title = 'Monthly report for ' +  monthName + ' ' + year;
           this.showToolbar = true;
+          this.showStats = true;
 
           break;
         }
+
         case 'category': {
           this.route.paramMap.subscribe(params => {
             this.store.dispatch(new GetCategoryRequestAction({id: params.get('id')} ));
           });
 
+          this.store.select(fromStore.selectCategory).subscribe((category) => {
+            if (category) {
+              this.title = 'Report for category ' + category.name;
+              this.store.dispatch(new GetExpensesByCategoryRequestAction({id: category.id}));
+            }
+          });
+
           this.showToolbar = false;
+          this.showStats = false;
+
           break;
         }
       }
