@@ -63,6 +63,7 @@ export class OverallExpenseReportBarChartComponent implements OnInit {
           }
         });
         this.barChartLabels = [];
+        console.log(report);
         Object.keys(report).forEach((key, index) => {
           this.barChartLabels.push(key);
           report[key].forEach((month) => {

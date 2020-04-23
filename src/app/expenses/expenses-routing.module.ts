@@ -8,7 +8,8 @@ import {NotFoundComponent} from '../shared/components/not-found/not-found.compon
 const expensesRoutes: Routes = [
   { path: 'expenses', component: AuthenticatedLayoutComponent, canActivate: [AuthGuardService],
     children: [
-      { path: '', component: ExpensesComponent },
+      { path: '', component: ExpensesComponent, data: { reportType: 'month' } },
+      { path: 'categories/:id', component: ExpensesComponent, data: { reportType: 'category' } },
       { path: '**', component: NotFoundComponent }
     ]
   },

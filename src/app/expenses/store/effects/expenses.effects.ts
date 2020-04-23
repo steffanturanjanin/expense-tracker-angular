@@ -30,7 +30,6 @@ export class ExpensesEffects {
           return new CreateExpenseSuccessAction({ expense: response });
         }),
         catchError((error) => {
-          console.log(error);
           return of(new CreateExpenseFailureAction({ error }));
         })
       );

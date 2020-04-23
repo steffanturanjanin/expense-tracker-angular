@@ -11,13 +11,11 @@ import { AddExpenseFormComponent } from './components/add-expense-form/add-expen
 
 import { AppState } from '../../../app.state';
 import * as fromStore from '../../store/reducers/index';
-import * as fromCategoriesStore from '../../../categories/store/reducers/index';
 
 import { DeleteExpensesRequestAction, GetExpensesByMonthRequestAction, RemoveExpenses } from '../../store/actions/expenses.actions';
-import { GetCategoriesRequestAction } from '../../../categories/store/actions/categories.actions';
 
 import { Expense } from '../../../shared/models/expense/expense';
-import { Category } from '../../../shared/models/category/category';
+import {GetCategoryRequestAction} from '../../store/actions/category.actions';
 
 
 @Component({
@@ -27,19 +25,14 @@ import { Category } from '../../../shared/models/category/category';
 })
 
 export class ExpensesComponent implements OnInit {
-  categories$: Observable<Category[]>;
   expenses$: Observable<Expense[]>;
   requesting$: Observable<boolean>;
+  showToolbar: boolean;
   showDelete = false;
+  title: string;
   expenses: Expense[];
   income: number;
   expense: number;
-
-  formatter = new Intl.DateTimeFormat('en', { month: 'long' });
-  date = new Date();
-  year = this.date.getFullYear();
-  month = this.date.getMonth() + 1;
-  monthName = this.formatter.format(this.date);
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -49,10 +42,34 @@ export class ExpensesComponent implements OnInit {
     this.requesting$ = this.store.select(fromStore.selectExpensesRequesting);
 
     this.store.dispatch(new RemoveExpenses());
-    this.store.dispatch(new GetExpensesByMonthRequestAction({year: this.year, month: this.month}));
-    this.store.dispatch(new GetCategoriesRequestAction());
 
-    this.categories$ = this.store.select(fromCategoriesStore.selectCategoriesAll);
+    this.route.data.subscribe(data => {
+      switch (data.reportType) {
+        case 'month': {
+          const formatter = new Intl.DateTimeFormat('en', { month: 'long' });
+          const date = new Date();
+          const year = date.getFullYear();
+          const month = date.getMonth() + 1;
+          const monthName = formatter.format(date);
+
+          this.store.dispatch(new GetExpensesByMonthRequestAction({ year, month }));
+
+          this.title = 'Monthly report for ' +  monthName + ' ' + year;
+          this.showToolbar = true;
+
+          break;
+        }
+        case 'category': {
+          this.route.paramMap.subscribe(params => {
+            this.store.dispatch(new GetCategoryRequestAction({id: params.get('id')} ));
+          });
+
+          this.showToolbar = false;
+          break;
+        }
+      }
+    });
+
     this.expenses$ = this.store.select(fromStore.selectExpensesAll);
 
     this.expenses$.subscribe((expenses) => {

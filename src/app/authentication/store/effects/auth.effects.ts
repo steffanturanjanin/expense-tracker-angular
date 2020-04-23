@@ -35,7 +35,6 @@ export class AuthEffects {
           return new SignUpSuccessAction({token: response.body.token, email: payload.email});
         }),
         catchError((error) => {
-          console.log(error);
           return of(new SignUpFailureAction({ error }));
         })
       );
@@ -47,13 +46,11 @@ export class AuthEffects {
     ofType<AuthActions>(AuthActionTypes.LOGIN_REQUEST),
     map((action: LoginRequestAction) => action.payload),
     switchMap(payload => {
-      console.log(payload);
       return this.authService.logIn(payload.email, payload.password).pipe(
         map((response) => {
           return new LoginSuccessAction({token: response.token, email: response.user.email});
         }),
         catchError((error) => {
-          console.log(error);
           return of(new LoginFailureAction({ error }));
         })
       );

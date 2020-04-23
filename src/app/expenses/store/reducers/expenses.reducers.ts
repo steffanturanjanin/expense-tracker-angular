@@ -16,71 +16,36 @@ export const initialState: State = adapter.getInitialState({
 
 export function reducer(state: State = initialState, action: ExpensesActions) {
   switch (action.type) {
-    case ExpensesActionTypes.CREATE_EXPENSE_REQUEST: {
-      return {
-        ...state,
-        requesting: true,
-        error: null
-      };
-    }
-    case ExpensesActionTypes.CREATE_EXPENSE_SUCCESS: {
-      return adapter.addOne(action.payload.expense,
-        { ...state, requesting: false, error: null});
-    }
-    case ExpensesActionTypes.CREATE_EXPENSE_FAILURE: {
-      return {
-        ...state,
-        requesting: false,
-        error: action.payload.error
-      };
-    }
-    case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_REQUEST: {
-      return {
-        ...state,
-        requesting: true,
-        error: null
-      };
-    }
-    case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_SUCCESS: {
-      return adapter.addMany(action.payload.expenses,
-        { ...state, requesting: false, error: null });
-    }
-    case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_FAILURE: {
-      return {
-        ...state,
-        requesting: false,
-        error: action.payload.error
-      };
-    }
-    case ExpensesActionTypes.GET_ALL_EXPENSES_REQUEST: {
-      return {
-        ...state,
-        requesting: true,
-        error: null
-      };
-    }
-    case ExpensesActionTypes.GET_ALL_EXPENSES_SUCCESS: {
-      return adapter.addMany(action.payload.expenses,
-        { ...state, requesting: false, error: null });
-    }
-    case ExpensesActionTypes.GET_ALL_EXPENSES_FAILURE: {
-      return {
-        ...state,
-        requesting: false,
-        error: action.payload.error
-      };
-    }
+    case ExpensesActionTypes.CREATE_EXPENSE_REQUEST:
+    case ExpensesActionTypes.GET_ALL_EXPENSES_REQUEST:
+    case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_REQUEST:
     case ExpensesActionTypes.DELETE_EXPENSE_REQUEST: {
       return {
         ...state,
         requesting: true,
-        error: null,
+        error: null
       };
     }
+
+    case ExpensesActionTypes.GET_ALL_EXPENSES_SUCCESS:
+    case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_SUCCESS: {
+      return adapter.addMany(action.payload.expenses,
+        { ...state, requesting: false, error: null });
+    }
+
+    case ExpensesActionTypes.CREATE_EXPENSE_SUCCESS: {
+      return adapter.addOne(action.payload.expense,
+        { ...state, requesting: false, error: null});
+    }
+
     case ExpensesActionTypes.DELETE_EXPENSE_SUCCESS: {
       return adapter.removeOne(action.payload.expense.id,
         { ...state, requesting: false, error: null});
     }
+
+    case ExpensesActionTypes.CREATE_EXPENSE_FAILURE:
+    case ExpensesActionTypes.GET_ALL_EXPENSES_FAILURE:
+    case ExpensesActionTypes.GET_EXPENSES_BY_MONTH_FAILURE:
     case ExpensesActionTypes.DELETE_EXPENSE_FAILURE: {
       return {
         ...state,
@@ -88,6 +53,7 @@ export function reducer(state: State = initialState, action: ExpensesActions) {
         error: action.payload.error
       };
     }
+
     case ExpensesActionTypes.REMOVE_EXPENSES: {
       return adapter.removeAll({ ...state });
     }

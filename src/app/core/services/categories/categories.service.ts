@@ -18,6 +18,10 @@ export class CategoriesService {
     return this.http.get<Category[]>('http://localhost:8000/api/categories');
   }
 
+  getCategory(id: number): Observable<Category> {
+    return this.http.get<Category>(`http://localhost:8000/api/categories/${id}`);
+  }
+
   deleteCategory(id: number): Observable<Category> {
     return this.http.delete(`http://localhost:8000/api/categories/${id}`);
   }

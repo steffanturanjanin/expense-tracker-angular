@@ -16,45 +16,8 @@ export const initialState: State = adapter.getInitialState({
 
 export function reducer(state: State = initialState, action: CategoriesActions) {
   switch (action.type) {
-    case CategoriesActionTypes.CREATE_CATEGORY_REQUEST: {
-      return {
-        ...state,
-        requesting: true,
-        error: null
-      };
-    }
-    case CategoriesActionTypes.CREATE_CATEGORY_SUCCESS: {
-      console.log('Success!!!');
-      return adapter.addOne(action.payload.category,
-        { ...state, requesting: false, error: null }
-        );
-    }
-    case CategoriesActionTypes.CREATE_CATEGORY_FAILURE: {
-      return {
-        ...state,
-        requesting: false,
-        error: action.payload.error
-      };
-    }
-    case CategoriesActionTypes.GET_CATEGORIES_REQUEST: {
-      return {
-        ...state,
-        requesting: true,
-        error: false
-      };
-    }
-    case CategoriesActionTypes.GET_CATEGORIES_SUCCESS: {
-      return adapter.addAll(action.payload.categories,
-        { ...state, requesting: false, error: null }
-        );
-    }
-    case CategoriesActionTypes.GET_CATEGORIES_FAILURE: {
-      return {
-        ...state,
-        requesting: false,
-        error: action.payload.error
-      };
-    }
+    case CategoriesActionTypes.CREATE_CATEGORY_REQUEST:
+    case CategoriesActionTypes.GET_CATEGORIES_REQUEST:
     case CategoriesActionTypes.DELETE_CATEGORY_REQUEST: {
       return {
         ...state,
@@ -62,11 +25,21 @@ export function reducer(state: State = initialState, action: CategoriesActions) 
         error: null
       };
     }
-    case CategoriesActionTypes.DELETE_CATEGORY_SUCCESS: {
-      return adapter.removeOne(action.payload.category.id,
-          { ...state, requesting: false, error: null }
+
+    case CategoriesActionTypes.CREATE_CATEGORY_SUCCESS: {
+      return adapter.addOne(action.payload.category,
+        { ...state, requesting: false, error: null }
         );
     }
+
+    case CategoriesActionTypes.GET_CATEGORIES_SUCCESS: {
+      return adapter.addAll(action.payload.categories,
+        { ...state, requesting: false, error: null }
+        );
+    }
+
+    case CategoriesActionTypes.CREATE_CATEGORY_FAILURE:
+    case CategoriesActionTypes.GET_CATEGORIES_FAILURE:
     case CategoriesActionTypes.DELETE_CATEGORY_FAILURE: {
       return {
         ...state,
@@ -74,6 +47,13 @@ export function reducer(state: State = initialState, action: CategoriesActions) 
         error: action.payload.error
       };
     }
+
+    case CategoriesActionTypes.DELETE_CATEGORY_SUCCESS: {
+      return adapter.removeOne(action.payload.category.id,
+          { ...state, requesting: false, error: null }
+        );
+    }
+
     default:
       return state;
   }
