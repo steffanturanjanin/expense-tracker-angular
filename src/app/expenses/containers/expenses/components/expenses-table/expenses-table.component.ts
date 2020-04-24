@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 import { Expense } from '../../../../../shared/models/expense/expense';
 import { Observable } from 'rxjs';
 
@@ -21,13 +22,14 @@ export class ExpensesTableComponent implements OnInit, OnChanges {
   @Output() onExpenseDeleted = new EventEmitter<Expense>();
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor() { }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource();
-    this.dataSource.data = this.expenses;
+    this.dataSource = new MatTableDataSource(this.expenses);
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   deleteExpense(row) {
@@ -39,5 +41,6 @@ export class ExpensesTableComponent implements OnInit, OnChanges {
     this.dataSource = new MatTableDataSource();
     this.dataSource.data = this.expenses;
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 }

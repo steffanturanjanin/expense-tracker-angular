@@ -6,7 +6,7 @@ import {
   MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatError,
   MatSidenavModule, MatListModule, MatGridListModule, MatSortModule, MatOptionModule,
   MatSelectModule, MatProgressBarModule, MatDividerModule, MatExpansionModule, MAT_DIALOG_DEFAULT_OPTIONS,
-  MatTooltipModule
+  MatTooltipModule, MatPaginatorModule
 } from '@angular/material';
 @NgModule({
   declarations: [
@@ -33,7 +33,8 @@ import {
     MatDividerModule,
     MatExpansionModule,
     MatOptionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatPaginatorModule
   ],
   exports: [
     CommonModule,
@@ -57,7 +58,8 @@ import {
     MatDividerModule,
     MatExpansionModule,
     MatOptionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
