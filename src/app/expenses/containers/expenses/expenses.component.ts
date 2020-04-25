@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { AddExpenseFormComponent } from './components/add-expense-form/add-expense-form.component';
 
@@ -18,8 +19,9 @@ import {
   RemoveExpenses
 } from '../../store/actions/expenses.actions';
 
+import { GetCategoryRequestAction } from '../../store/actions/category.actions';
+
 import { Expense } from '../../../shared/models/expense/expense';
-import {GetCategoryRequestAction} from '../../store/actions/category.actions';
 
 @Component({
   selector: 'app-expenses',
@@ -27,14 +29,17 @@ import {GetCategoryRequestAction} from '../../store/actions/category.actions';
   styleUrls: ['./expenses.component.css']
 })
 
-export class ExpensesComponent implements OnInit {
-  expenses$: Observable<Expense[]>;
+export class ExpensesComponent implements OnInit, OnDestroy {
   requesting$: Observable<boolean>;
+  expenses$: Observable<Expense[]>;
+  expenses: Expense[];
+  categorySubscription: Subscription;
+  expensesSubscription: Subscription;
+  routeDataScubscription: Subscription;
   showToolbar: boolean;
   showStats: boolean;
   showDelete = false;
   title: string;
-  expenses: Expense[];
   income: number;
   expense: number;
 
@@ -46,12 +51,22 @@ export class ExpensesComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog) {}
 
+  static calculateIncome(expenses: Expense[]) {
+    return expenses.filter(expense => expense.type === 'income')
+      .reduce((accumulator, expense) => accumulator + expense.amount, 0);
+  }
+
+  static calculateExpense(expenses: Expense[]) {
+    return expenses.filter(expense => expense.type === 'expense')
+      .reduce((accumulator, expense) => accumulator + expense.amount, 0);
+  }
+
   ngOnInit() {
     this.requesting$ = this.store.select(fromStore.selectExpensesRequesting);
 
     this.store.dispatch(new RemoveExpenses());
 
-    this.route.data.subscribe(data => {
+    this.routeDataScubscription = this.route.data.subscribe(data => {
       switch (data.reportType) {
         case 'month': {
           const formatter = new Intl.DateTimeFormat('en', { month: 'long' });
@@ -70,16 +85,19 @@ export class ExpensesComponent implements OnInit {
         }
 
         case 'category': {
-          this.route.paramMap.subscribe(params => {
-            this.store.dispatch(new GetCategoryRequestAction({id: params.get('id')} ));
-          });
-
-          this.store.select(fromStore.selectCategory).subscribe((category) => {
-            if (category) {
-              this.title = 'Report for category ' + category.name;
-              this.store.dispatch(new GetExpensesByCategoryRequestAction({id: category.id}));
-            }
-          });
+          this.categorySubscription = this.route.paramMap.pipe(
+            switchMap(params => {
+              this.store.dispatch(new GetCategoryRequestAction({id: params.get('id')} ));
+              return this.store.select(fromStore.selectCategory);
+            })
+          )
+            .subscribe(category => {
+              if (category) {
+                this.title = 'Report for category ' + category.name;
+                this.store.dispatch(new GetExpensesByCategoryRequestAction({id: category.id}));
+              }
+            })
+          ;
 
           this.showToolbar = false;
           this.showStats = false;
@@ -91,11 +109,19 @@ export class ExpensesComponent implements OnInit {
 
     this.expenses$ = this.store.select(fromStore.selectExpensesAll);
 
-    this.expenses$.subscribe((expenses) => {
+    this.expensesSubscription = this.expenses$.subscribe((expenses) => {
       this.expenses = expenses;
-      this.income = this.calculateIncome(this.expenses);
-      this.expense =  this.calculateExpense(this.expenses);
+      this.income = ExpensesComponent.calculateIncome(this.expenses);
+      this.expense =  ExpensesComponent.calculateExpense(this.expenses);
     });
+  }
+
+  ngOnDestroy() {
+    if (this.categorySubscription) {
+      this.categorySubscription.unsubscribe();
+    }
+    this.expensesSubscription.unsubscribe();
+    this.routeDataScubscription.unsubscribe();
   }
 
   onDialogOpen() {
@@ -117,15 +143,5 @@ export class ExpensesComponent implements OnInit {
           this.showDelete = false;
         }
     });
-  }
-
-  calculateIncome(expenses: Expense[]) {
-    return expenses.filter(expense => expense.type === 'income')
-      .reduce((accumulator, expense) => accumulator + expense.amount, 0);
-  }
-
-  calculateExpense(expenses: Expense[]) {
-    return expenses.filter(expense => expense.type === 'expense')
-      .reduce((accumulator, expense) => accumulator + expense.amount, 0);
   }
 }
