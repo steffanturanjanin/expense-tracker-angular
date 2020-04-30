@@ -35,7 +35,7 @@ export class ExpensesComponent implements OnInit, OnDestroy {
   expenses: Expense[];
   categorySubscription: Subscription;
   expensesSubscription: Subscription;
-  routeDataScubscription: Subscription;
+  routeDataSubscription: Subscription;
   showToolbar: boolean;
   showStats: boolean;
   showDelete = false;
@@ -66,7 +66,7 @@ export class ExpensesComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(new RemoveExpenses());
 
-    this.routeDataScubscription = this.route.data.subscribe(data => {
+    this.routeDataSubscription = this.route.data.subscribe(data => {
       switch (data.reportType) {
         case 'month': {
           const formatter = new Intl.DateTimeFormat('en', { month: 'long' });
@@ -121,7 +121,7 @@ export class ExpensesComponent implements OnInit, OnDestroy {
       this.categorySubscription.unsubscribe();
     }
     this.expensesSubscription.unsubscribe();
-    this.routeDataScubscription.unsubscribe();
+    this.routeDataSubscription.unsubscribe();
   }
 
   onDialogOpen() {
